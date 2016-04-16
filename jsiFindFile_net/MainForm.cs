@@ -47,20 +47,26 @@ namespace jsiGrepWinForm
             _includeFilters = includeTextBox.Text.ToUpperInvariant().Split('|');
             _excludeFilters = excludeTextBox.Text.ToUpperInvariant().Split('|');
 
-            var fileList = usePreviousCheckBox.Checked ? GetOldFileList() : GetNewFileList();
+            var search = new SearchManager(_excludeFilters, _includeFilters, needleTextBox.Text);
+            search.FoundMatch += Search_FoundMatch;
 
+            var matches = new List<Match>();
+            if (usePreviousCheckBox.Checked)
+            {
+                matches = search.Search(GetOldFileList());
+            }
+            else
+            {
+                matches = search.Search(rootFolderTextBox.Text);
+            }
             lstResults.Items.Clear();
 
-            foreach (var f in fileList)
-            {
-                if (_stop) return;
-                if (!IncludeFile(f)) continue;
-                if (ExcludePathContaining(f)) continue;
-
-                var matches = SearchFile(f);
-                if (matches.Count > 0) AddMatches(f, matches);
-            }
             ToggleSearchState(false);
+        }
+
+        private void Search_FoundMatch(object sender, Match m)
+        {
+            
         }
 
         private void SaveSearchSettings()
@@ -93,50 +99,6 @@ namespace jsiGrepWinForm
             
         }
 
-        private bool IncludeFile(string filename)
-        {
-            if (string.IsNullOrEmpty(includeTextBox.Text)) return true;
-
-            foreach (var filter in _includeFilters)
-            {
-                if (filename.ToUpperInvariant().Like(filter)) return true;
-            }
-            return false;
-        }
-
-        private bool ExcludePathContaining(string filename)
-        {
-            if (string.IsNullOrEmpty(excludeTextBox.Text)) return false;
-
-            foreach (var filter in _excludeFilters)
-            {
-                if (filename.ToUpperInvariant().Contains(filter))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private void AddMatches(string fileName, List<string> matches)
-        {
-            var fileMatch = lstResults.Items.Add(Path.GetFileName(fileName));
-            fileMatch.SubItems.Add(matches.Count().ToString());
-            fileMatch.SubItems.Add(Path.GetDirectoryName(fileName));
-            Application.DoEvents();
-
-            foreach (var line in matches)
-            {
-                
-            }
-
-        }
-        private List<string> GetNewFileList()
-        {
-
-            return Directory.GetFiles(rootFolderTextBox.Text, "*.*", SearchOption.AllDirectories).ToList();
-        }
-
         private List<string> GetOldFileList()
         {
             var result = new List<string>();
@@ -148,14 +110,6 @@ namespace jsiGrepWinForm
             return result;
         }
 
-        private List<string> SearchFile(string fileName)
-        {
-            var needle = needleTextBox.Text.ToUpperInvariant();
-            searchingLabel.Text = fileName;
-            Application.DoEvents();
-            
-            return File.ReadLines(fileName).Where(line => line.ToUpperInvariant().Contains(needle)).ToList();
-        }
 
         private void StopButton_Click(object sender, EventArgs e)
         {

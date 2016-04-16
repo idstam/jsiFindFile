@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace jsiGrepWinForm
@@ -26,5 +27,10 @@ namespace jsiGrepWinForm
         public int LineNumber { get; set; }
     	public int Position { get; set; }
 
+    }
+
+    public class MatchEventArgs : EventArgs
+    {
+        public Match Match;
     }
 }
