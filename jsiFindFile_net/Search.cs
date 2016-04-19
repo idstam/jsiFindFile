@@ -22,24 +22,37 @@ namespace jsiGrepWinForm
             _needle = needle;
         }
 
-        public List<Match> Search(string rootFolder, List<Match> matches = null)
+        public List<Match> Search(object haystack)
+        {
+            if (haystack is string)
+            {
+                return Search((string) haystack);
+            }
+            else
+            {
+                return Search((List<string>) haystack);
+            }
+
+        }
+        private List<Match> Search(string rootFolder, List<Match> matches = null)
         {
             if (matches == null) matches = new List<Match>();
+            OnSearchingFolder(new SearchingFolderEventArgs {Folder = rootFolder});
+            
             _rootFolder = rootFolder;
             var folderContent = GetFolderContent(rootFolder);
 
 			matches.AddRange(SearchFiles(folderContent.Item1.ToList()));
 
-            //foreach (var folder in folderContent.Item2)
-            Parallel.ForEach(folderContent.Item2, folder =>
+            foreach (var folder in folderContent.Item2)
             {
                 Search(folder, matches);
-            });
+            }
 
             return matches;
         }
 
-        public List<Match> Search(List<string> files)
+        private List<Match> Search(List<string> files)
         {
             _originalFiles = files;
             return SearchFiles(files);
@@ -49,15 +62,16 @@ namespace jsiGrepWinForm
         {
             var ret = new List<Match>();
 
-            //foreach (var f in files)
-            Parallel.ForEach(files, f =>
+            foreach (var f in files)
+            //Parallel.ForEach(files, f =>
             {
-                if (!IncludeFile(f)) return;
-                if (ExcludePathContaining(f)) return;
+                if (!IncludeFile(f)) continue;
+                if (ExcludePathContaining(f)) continue;
 
                 var match = SearchFile(f);
                 if (match != null) ret.Add(match);
-            });
+            }
+            //);
 
             return ret;
         }
@@ -100,7 +114,7 @@ namespace jsiGrepWinForm
             var match = new Match(fileName, _needle);
 
             var lineNumber = 0;
-            foreach (var line in File.ReadLines(fileName))
+            foreach(var line in File.ReadLines(fileName))
             {
                 lineNumber++;
                 var upperLine = line.ToUpperInvariant();
@@ -126,5 +140,16 @@ namespace jsiGrepWinForm
             var handler = FoundMatch;
             handler?.Invoke(this, e);
         }
+        public event EventHandler SearchingFolder;
+        private void OnSearchingFolder(SearchingFolderEventArgs e)
+        {
+            var handler = SearchingFolder;
+            handler?.Invoke(this, e);
+        }
+    }
+
+    public class SearchingFolderEventArgs : EventArgs
+    {
+        public string Folder { get; set; }
     }
 }

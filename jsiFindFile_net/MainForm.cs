@@ -47,26 +47,36 @@ namespace jsiGrepWinForm
             _includeFilters = includeTextBox.Text.ToUpperInvariant().Split('|');
             _excludeFilters = excludeTextBox.Text.ToUpperInvariant().Split('|');
 
-            var search = new SearchManager(_excludeFilters, _includeFilters, needleTextBox.Text);
+            var search = new SearchManager(_includeFilters, _excludeFilters, needleTextBox.Text);
             search.FoundMatch += Search_FoundMatch;
-
+            search.SearchingFolder += Search_SearchingFolder;
+            object haystack;
             var matches = new List<Match>();
             if (usePreviousCheckBox.Checked)
             {
-                matches = search.Search(GetOldFileList());
+                haystack = GetOldFileList();
             }
             else
             {
-                matches = search.Search(rootFolderTextBox.Text);
+                haystack = rootFolderTextBox.Text;
             }
             lstResults.Items.Clear();
-
+            search.Search(haystack);
+            
             ToggleSearchState(false);
         }
 
-        private void Search_FoundMatch(object sender, Match m)
+        private void Search_SearchingFolder(object sender, EventArgs e)
         {
-            
+            var f = (e as SearchingFolderEventArgs)?.Folder;
+            searchingLabel.Invoke((MethodInvoker)(() => searchingLabel.Text = f));
+            Application.DoEvents();
+        }
+
+        private void Search_FoundMatch(object sender, EventArgs m)
+        {
+            var match = (m as MatchEventArgs)?.Match;
+
         }
 
         private void SaveSearchSettings()
