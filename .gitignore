@@ -234,3 +234,12 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+.idea/modules.xml
+.idea/workspace.xml
+jsiFindFile.sln.iml
+jsiFindFile_py/.idea/encodings.xml
+jsiFindFile_py/.idea/jsiFindFile_py.iml
+jsiFindFile_py/.idea/misc.xml
+jsiFindFile_py/.idea/modules.xml
+jsiFindFile_py/.idea/workspace.xml

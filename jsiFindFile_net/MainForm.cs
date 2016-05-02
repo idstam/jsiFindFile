@@ -69,14 +69,26 @@ namespace jsiGrepWinForm
         private void Search_SearchingFolder(object sender, EventArgs e)
         {
             var f = (e as SearchingFolderEventArgs)?.Folder;
-            searchingLabel.Invoke((MethodInvoker)(() => searchingLabel.Text = f));
-            Application.DoEvents();
+            if (!string.IsNullOrEmpty(f))
+            {
+                searchingLabel.Invoke((MethodInvoker) (() => searchingLabel.Text = f));
+                Application.DoEvents();
+            }
         }
 
         private void Search_FoundMatch(object sender, EventArgs m)
         {
             var match = (m as MatchEventArgs)?.Match;
-
+            if (match != null)
+            {
+                var fileItem = new ListViewItem();
+                fileItem.Text = match.FileName;
+                fileItem.SubItems.Add(match.MatchLines.Count.ToString());
+                fileItem.SubItems.Add(match.FilePath);
+                fileItem.ToolTipText = match.ToToolTipString();
+                lstResults.Invoke((MethodInvoker) (() => lstResults.Items.Add(fileItem)));
+                Application.DoEvents();
+            }
         }
 
         private void SaveSearchSettings()

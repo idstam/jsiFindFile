@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace jsiGrepWinForm
 {
@@ -17,6 +18,11 @@ namespace jsiGrepWinForm
             MatchLines = new List<MatchLine>();
             Needle = needle;
             _fullPath = fullPath;
+        }
+
+        public string ToToolTipString()
+        {
+            return MatchLines.Aggregate("", (current, line) => current + ($"{line.LineNumber}.{line.Position} {line.Line}" + Environment.NewLine));
         }
     }
 
