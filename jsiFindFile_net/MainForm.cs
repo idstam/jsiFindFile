@@ -89,7 +89,7 @@ namespace jsiGrepWinForm
                 lstResults.Invoke((MethodInvoker) (() => lstResults.Items.Add(fileItem)));
                 Application.DoEvents();
             }
-            lstResults.Items.Add(matchItem);
+            
 
         }
         
