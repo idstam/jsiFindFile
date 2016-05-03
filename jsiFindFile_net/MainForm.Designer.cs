@@ -131,6 +131,7 @@
             this.lstResults.Location = new System.Drawing.Point(3, 3);
             this.lstResults.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lstResults.Name = "lstResults";
+            this.lstResults.ShowItemToolTips = true;
             this.lstResults.Size = new System.Drawing.Size(955, 231);
             this.lstResults.TabIndex = 5;
             this.lstResults.UseCompatibleStateImageBehavior = false;
@@ -313,7 +314,7 @@
             this.tabLines.Location = new System.Drawing.Point(4, 26);
             this.tabLines.Name = "tabLines";
             this.tabLines.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLines.Size = new System.Drawing.Size(959, 237);
+            this.tabLines.Size = new System.Drawing.Size(961, 237);
             this.tabLines.TabIndex = 1;
             this.tabLines.Text = "Lines";
             this.tabLines.UseVisualStyleBackColor = true;

@@ -127,11 +127,19 @@ namespace jsiGrepWinForm
                         Position = upperLine.IndexOf(needle, StringComparison.InvariantCultureIgnoreCase)
                     });
 
-                    OnFoundMatch(new MatchEventArgs {Match =  match});
+                    
                 }
             }
-
-            return match.MatchLines.Count > 0 ? match : null;
+            if (match.MatchLines.Any())
+            {
+                OnFoundMatch(new MatchEventArgs {Match = match});
+                return match;
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         public event EventHandler FoundMatch ;

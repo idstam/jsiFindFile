@@ -8,16 +8,23 @@ namespace jsiGrepWinForm
     public class Match
     {
         public string FileName { get; set; }
-    	public string FilePath { get; set; }
-    	public List<MatchLine> MatchLines{get;set;}
+
+        public string FilePath
+        {
+            get { return Path.GetDirectoryName(FullPath); }
+        }
+
+        public List<MatchLine> MatchLines{get;set;}
 		public string Needle { get; set; }
-        private string _fullPath;
+
+        public string FullPath { get; set; }
 
         public Match(string fullPath, string needle)
         {
             MatchLines = new List<MatchLine>();
             Needle = needle;
-            _fullPath = fullPath;
+            FullPath = fullPath;
+            FileName = Path.GetFileName(FullPath);
         }
 
         public string ToToolTipString()

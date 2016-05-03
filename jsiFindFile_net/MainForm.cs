@@ -78,7 +78,7 @@ namespace jsiGrepWinForm
 
         private void Search_FoundMatch(object sender, EventArgs m)
         {
-            var match = (m as MatchEventArgs)?.Match;
+            Match match = (m as MatchEventArgs)?.Match;
             if (match != null)
             {
                 var fileItem = new ListViewItem();
@@ -89,8 +89,10 @@ namespace jsiGrepWinForm
                 lstResults.Invoke((MethodInvoker) (() => lstResults.Items.Add(fileItem)));
                 Application.DoEvents();
             }
-        }
+            lstResults.Items.Add(matchItem);
 
+        }
+        
         private void SaveSearchSettings()
         {
             Properties.Settings.Default.lastNeedle = needleTextBox.Text;
