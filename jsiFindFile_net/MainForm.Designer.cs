@@ -210,7 +210,7 @@
             // 
             this.usePreviousCheckBox.AutoSize = true;
             this.usePreviousCheckBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usePreviousCheckBox.Location = new System.Drawing.Point(334, 144);
+            this.usePreviousCheckBox.Location = new System.Drawing.Point(273, 144);
             this.usePreviousCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.usePreviousCheckBox.Name = "usePreviousCheckBox";
             this.usePreviousCheckBox.Size = new System.Drawing.Size(214, 21);
