@@ -47,7 +47,7 @@ namespace jsiGrepWinForm
             _includeFilters = includeTextBox.Text.ToUpperInvariant().Split('|');
             _excludeFilters = excludeTextBox.Text.ToUpperInvariant().Split('|');
 
-            var search = new SearchManager(_includeFilters, _excludeFilters, needleTextBox.Text);
+            var search = new SearchManager(_includeFilters, _excludeFilters, needleTextBox.Text, subFoldersCheckBox.Checked);
             search.FoundMatch += Search_FoundMatch;
             search.SearchingFolder += Search_SearchingFolder;
             object haystack;
@@ -88,6 +88,7 @@ namespace jsiGrepWinForm
                 fileItem.ToolTipText = match.ToToolTipString();
                 lstResults.Invoke((MethodInvoker) (() => lstResults.Items.Add(fileItem)));
                 Application.DoEvents();
+                
             }
             
 

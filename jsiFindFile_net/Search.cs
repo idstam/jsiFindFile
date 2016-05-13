@@ -12,13 +12,16 @@ namespace jsiGrepWinForm
         private List<string> _originalFiles;
         private List<Match> _result;
         private bool _stop;
-        private string[] _includeFilters;
-        private string[] _excludeFilters;
+        private string[] _includeFilters = null;
+        private string[] _excludeFilters = null;
         private string _needle;
-        public SearchManager(string[] includeFilters, string[] excludeFilters, string needle)
+        private bool _searchSubFolders;
+
+        public SearchManager(string[] includeFilters, string[] excludeFilters, string needle, bool searchSubFolders)
         {
-            _includeFilters = includeFilters?.Length > 0 ? includeFilters : null;
-            _excludeFilters = excludeFilters?.Length > 0 ? excludeFilters : null;
+            _includeFilters = includeFilters.Where(f => f != "").ToArray();
+            _excludeFilters = excludeFilters.Where(f => f != "").ToArray();
+            _searchSubFolders = searchSubFolders;
             _needle = needle;
         }
 
@@ -44,9 +47,12 @@ namespace jsiGrepWinForm
 
 			matches.AddRange(SearchFiles(folderContent.Item1.ToList()));
 
-            foreach (var folder in folderContent.Item2)
+            if (_searchSubFolders)
             {
-                Search(folder, matches);
+                foreach (var folder in folderContent.Item2)
+                {
+                    Search(folder, matches);
+                }
             }
 
             return matches;
@@ -85,7 +91,7 @@ namespace jsiGrepWinForm
 
         private bool IncludeFile(string filename)
         {
-            if (_includeFilters== null) return true;
+            if (_includeFilters == null || _includeFilters.Length == 0) return true;
 
             foreach (var filter in _includeFilters)
             {
@@ -96,7 +102,7 @@ namespace jsiGrepWinForm
 
         private bool ExcludePathContaining(string filename)
         {
-            if (_excludeFilters == null) return false;
+            if (_excludeFilters == null || _excludeFilters.Length == 0) return false;
 
             foreach (var filter in _excludeFilters)
             {

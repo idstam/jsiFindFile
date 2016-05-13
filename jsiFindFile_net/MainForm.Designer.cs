@@ -57,6 +57,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabFiles = new System.Windows.Forms.TabPage();
             this.tabLines = new System.Windows.Forms.TabPage();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.subFoldersCheckBox = new System.Windows.Forms.CheckBox();
             this.resultPopUp.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabFiles.SuspendLayout();
@@ -77,10 +79,10 @@
             this.rootFolderTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rootFolderTextBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rootFolderTextBox.Location = new System.Drawing.Point(85, 8);
+            this.rootFolderTextBox.Location = new System.Drawing.Point(114, 8);
             this.rootFolderTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rootFolderTextBox.Name = "rootFolderTextBox";
-            this.rootFolderTextBox.Size = new System.Drawing.Size(837, 24);
+            this.rootFolderTextBox.Size = new System.Drawing.Size(814, 24);
             this.rootFolderTextBox.TabIndex = 1;
             this.rootFolderTextBox.Text = "c:\\git";
             // 
@@ -102,10 +104,10 @@
             this.needleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.needleTextBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.needleTextBox.Location = new System.Drawing.Point(85, 43);
+            this.needleTextBox.Location = new System.Drawing.Point(114, 43);
             this.needleTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.needleTextBox.Name = "needleTextBox";
-            this.needleTextBox.Size = new System.Drawing.Size(837, 24);
+            this.needleTextBox.Size = new System.Drawing.Size(814, 24);
             this.needleTextBox.TabIndex = 4;
             // 
             // label2
@@ -208,7 +210,7 @@
             // 
             this.usePreviousCheckBox.AutoSize = true;
             this.usePreviousCheckBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usePreviousCheckBox.Location = new System.Drawing.Point(85, 144);
+            this.usePreviousCheckBox.Location = new System.Drawing.Point(334, 144);
             this.usePreviousCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.usePreviousCheckBox.Name = "usePreviousCheckBox";
             this.usePreviousCheckBox.Size = new System.Drawing.Size(214, 21);
@@ -243,10 +245,10 @@
             this.includeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.includeTextBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.includeTextBox.Location = new System.Drawing.Point(85, 77);
+            this.includeTextBox.Location = new System.Drawing.Point(114, 77);
             this.includeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.includeTextBox.Name = "includeTextBox";
-            this.includeTextBox.Size = new System.Drawing.Size(837, 24);
+            this.includeTextBox.Size = new System.Drawing.Size(814, 24);
             this.includeTextBox.TabIndex = 11;
             this.includeTextBox.Text = "*.bas|*.vb|*.frm|*.cls|*.cs|*.sql";
             // 
@@ -256,19 +258,21 @@
             this.label4.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(1, 81);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(57, 17);
+            this.label4.Size = new System.Drawing.Size(110, 17);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Include:";
+            this.label4.Text = "Include filetypes:";
+            this.toolTip1.SetToolTip(this.label4, "Pipe separated list of file types to include in the search. Example: *.bas|*.vb|*" +
+        ".frm|*.cls|*.cs|*.sql");
             // 
             // excludeTextBox
             // 
             this.excludeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.excludeTextBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.excludeTextBox.Location = new System.Drawing.Point(85, 112);
+            this.excludeTextBox.Location = new System.Drawing.Point(114, 112);
             this.excludeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.excludeTextBox.Name = "excludeTextBox";
-            this.excludeTextBox.Size = new System.Drawing.Size(837, 24);
+            this.excludeTextBox.Size = new System.Drawing.Size(814, 24);
             this.excludeTextBox.TabIndex = 13;
             // 
             // label5
@@ -277,9 +281,10 @@
             this.label5.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(1, 115);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 17);
+            this.label5.Size = new System.Drawing.Size(105, 17);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Exclude:";
+            this.label5.Text = "Exclude folders:";
+            this.toolTip1.SetToolTip(this.label5, "Pipe separated list of folders to ignore while searching. Example .git|bin|obj");
             // 
             // openFileDialog1
             // 
@@ -319,11 +324,26 @@
             this.tabLines.Text = "Lines";
             this.tabLines.UseVisualStyleBackColor = true;
             // 
+            // subFoldersCheckBox
+            // 
+            this.subFoldersCheckBox.AutoSize = true;
+            this.subFoldersCheckBox.Checked = true;
+            this.subFoldersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.subFoldersCheckBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subFoldersCheckBox.Location = new System.Drawing.Point(114, 144);
+            this.subFoldersCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.subFoldersCheckBox.Name = "subFoldersCheckBox";
+            this.subFoldersCheckBox.Size = new System.Drawing.Size(153, 21);
+            this.subFoldersCheckBox.TabIndex = 15;
+            this.subFoldersCheckBox.Text = "Search in sub folders";
+            this.subFoldersCheckBox.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 483);
+            this.Controls.Add(this.subFoldersCheckBox);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.excludeTextBox);
             this.Controls.Add(this.label5);
@@ -381,6 +401,8 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabFiles;
         private System.Windows.Forms.TabPage tabLines;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.CheckBox subFoldersCheckBox;
     }
 }
 
