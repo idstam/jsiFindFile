@@ -21,6 +21,7 @@ namespace jsiGrepWinForm
         private string[] _excludeFilters;
         private bool _stop = false;
         private bool _searching = false;
+        private SearchManager _currentSearch = null;
         public MainForm()
         {
             InitializeComponent();
@@ -48,9 +49,9 @@ namespace jsiGrepWinForm
             _includeFilters = includeTextBox.Text.ToUpperInvariant().Split('|');
             _excludeFilters = excludeTextBox.Text.ToUpperInvariant().Split('|');
 
-            var search = new SearchManager(_includeFilters, _excludeFilters, needleTextBox.Text, subFoldersCheckBox.Checked);
-            search.FoundMatch += Search_FoundMatch;
-            search.SearchingFolder += Search_SearchingFolder;
+            _currentSearch = new SearchManager(_includeFilters, _excludeFilters, needleTextBox.Text, subFoldersCheckBox.Checked);
+            _currentSearch.FoundMatch += Search_FoundMatch;
+            _currentSearch.SearchingFolder += Search_SearchingFolder;
             object haystack;
             var matches = new List<Match>();
             if (usePreviousCheckBox.Checked)
@@ -62,7 +63,7 @@ namespace jsiGrepWinForm
                 haystack = rootFolderTextBox.Text;
             }
             lstResults.Items.Clear();
-            search.Search(haystack);
+            _currentSearch.Search(haystack);
             
             ToggleSearchState(false);
         }
@@ -120,6 +121,7 @@ namespace jsiGrepWinForm
                 Cursor.Current = Cursors.Default;
                 searchButton.Text = "Search";
                 _stop = true;
+                _currentSearch.Stop();
             }
 
             

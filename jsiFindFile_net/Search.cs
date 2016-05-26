@@ -11,7 +11,7 @@ namespace jsiGrepWinForm
         private string _rootFolder;
         private List<string> _originalFiles;
         private List<Match> _result;
-        private bool _stop;
+        private bool _stop = false;
         private string[] _includeFilters = null;
         private string[] _excludeFilters = null;
         private string _needle;
@@ -23,6 +23,7 @@ namespace jsiGrepWinForm
             _excludeFilters = excludeFilters.Where(f => f != "").ToArray();
             _searchSubFolders = searchSubFolders;
             _needle = needle;
+            _stop = false;
         }
 
         public List<Match> Search(object haystack)
@@ -51,6 +52,7 @@ namespace jsiGrepWinForm
             {
                 foreach (var folder in folderContent.Item2)
                 {
+                    if (_stop) return matches;
                     Search(folder, matches);
                 }
             }
@@ -76,6 +78,8 @@ namespace jsiGrepWinForm
 
                 var match = SearchFile(f);
                 if (match != null) ret.Add(match);
+
+                if (_stop) return ret;
             }
             //);
 
@@ -159,6 +163,11 @@ namespace jsiGrepWinForm
         {
             var handler = SearchingFolder;
             handler?.Invoke(this, e);
+        }
+
+        public void Stop()
+        {
+            _stop = true;
         }
     }
 
