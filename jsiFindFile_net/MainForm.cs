@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using jsiFindFile;
 
 namespace jsiGrepWinForm
 {
@@ -22,6 +23,7 @@ namespace jsiGrepWinForm
         private bool _stop = false;
         private bool _searching = false;
         private SearchManager _currentSearch = null;
+        private Settings _settings = new Settings();
         public MainForm()
         {
             InitializeComponent();
@@ -98,11 +100,11 @@ namespace jsiGrepWinForm
         
         private void SaveSearchSettings()
         {
-            Properties.Settings.Default.lastNeedle = needleTextBox.Text;
-            Properties.Settings.Default.lastRoot = rootFolderTextBox.Text;
-            Properties.Settings.Default.lastInclude = includeTextBox.Text;
-            Properties.Settings.Default.lastExclude = excludeTextBox.Text;
-            Properties.Settings.Default.Save();
+            _settings.Needle = needleTextBox.Text;
+            _settings.SearchRoot = rootFolderTextBox.Text;
+            _settings.IncludeFilter = includeTextBox.Text;
+            _settings.ExcludeFilter = excludeTextBox.Text;
+            _settings.Save();
         }
 
         private void ToggleSearchState(bool searching)
@@ -153,10 +155,10 @@ namespace jsiGrepWinForm
 
         private void LoadSearchSettings()
         {
-            needleTextBox.Text = Properties.Settings.Default.lastNeedle;
-            rootFolderTextBox.Text = Properties.Settings.Default.lastRoot;
-            includeTextBox.Text = Properties.Settings.Default.lastInclude;
-            excludeTextBox.Text = Properties.Settings.Default.lastExclude;
+            needleTextBox.Text = _settings.Needle;
+            rootFolderTextBox.Text = _settings.SearchRoot;
+            includeTextBox.Text = _settings.IncludeFilter;
+            excludeTextBox.Text = _settings.ExcludeFilter;
         }
 
         private void resultPopUp_Opening(object sender, CancelEventArgs e)

@@ -84,7 +84,6 @@
             this.rootFolderTextBox.Name = "rootFolderTextBox";
             this.rootFolderTextBox.Size = new System.Drawing.Size(814, 24);
             this.rootFolderTextBox.TabIndex = 1;
-            this.rootFolderTextBox.Text = "c:\\git";
             // 
             // openFolderButton
             // 
@@ -251,7 +250,6 @@
             this.includeTextBox.Name = "includeTextBox";
             this.includeTextBox.Size = new System.Drawing.Size(814, 24);
             this.includeTextBox.TabIndex = 11;
-            this.includeTextBox.Text = "*.bas|*.vb|*.frm|*.cls|*.cs|*.sql";
             // 
             // label4
             // 
