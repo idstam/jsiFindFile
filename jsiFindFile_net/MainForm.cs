@@ -215,5 +215,25 @@ namespace jsiGrepWinForm
             }
 
         }
+
+        private void copyFileResultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var sb = new StringBuilder();
+            foreach (ColumnHeader c in lstResults.Columns)
+            {
+                sb.Append(c.Text + "\t");
+            }
+            sb.AppendLine();
+            foreach (ListViewItem item in lstResults.Items)
+            {
+                foreach (ListViewItem.ListViewSubItem s in item.SubItems)
+                {
+                    sb.Append(s.Text);
+                    sb.Append("\t");
+                }
+                sb.AppendLine();
+            }
+            Clipboard.SetText(sb.ToString());
+        }
     }
 }

@@ -59,6 +59,7 @@
             this.tabLines = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.subFoldersCheckBox = new System.Windows.Forms.CheckBox();
+            this.copyFileResultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resultPopUp.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabFiles.SuspendLayout();
@@ -160,9 +161,10 @@
             this.editToolStripMenuItem,
             this.openContainingFolderToolStripMenuItem,
             this.copyFullPathToolStripMenuItem,
-            this.copyFilenameToolStripMenuItem});
+            this.copyFilenameToolStripMenuItem,
+            this.copyFileResultToolStripMenuItem});
             this.resultPopUp.Name = "resultPopUp";
-            this.resultPopUp.Size = new System.Drawing.Size(202, 92);
+            this.resultPopUp.Size = new System.Drawing.Size(202, 136);
             this.resultPopUp.Opening += new System.ComponentModel.CancelEventHandler(this.resultPopUp_Opening);
             // 
             // editToolStripMenuItem
@@ -337,6 +339,13 @@
             this.subFoldersCheckBox.Text = "Search in sub folders";
             this.subFoldersCheckBox.UseVisualStyleBackColor = true;
             // 
+            // copyFileResultToolStripMenuItem
+            // 
+            this.copyFileResultToolStripMenuItem.Name = "copyFileResultToolStripMenuItem";
+            this.copyFileResultToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.copyFileResultToolStripMenuItem.Text = "Copy All";
+            this.copyFileResultToolStripMenuItem.Click += new System.EventHandler(this.copyFileResultToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -402,6 +411,7 @@
         private System.Windows.Forms.TabPage tabLines;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.CheckBox subFoldersCheckBox;
+        private System.Windows.Forms.ToolStripMenuItem copyFileResultToolStripMenuItem;
     }
 }
 
