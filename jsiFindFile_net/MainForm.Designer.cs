@@ -115,6 +115,7 @@
             this.label2.Size = new System.Drawing.Size(76, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Search for:";
+            this.toolTip1.SetToolTip(this.label2, "There\'s a context menue here. Try to right click.");
             // 
             // lstResults
             // 
