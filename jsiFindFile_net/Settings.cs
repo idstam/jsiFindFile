@@ -12,9 +12,12 @@ namespace jsiFindFile
 {
     public class Settings
     {
-        public string IncludeFilter {
+        public string LastIncludeFilter {
             get{return _data.IncludeFilterSet.LastOrDefault();}
             set { _data.IncludeFilterSet.Add(value); } }
+
+        public string[] IncludeFilters => _data.IncludeFilterSet.Reverse().ToArray();
+
         public string ExcludeFilter
         {
             get { return _data.ExcludeFilterSet.LastOrDefault(); }
@@ -27,12 +30,13 @@ namespace jsiFindFile
             set { _data.SearchRootSet.Add(value); }
         }
 
-        public string Needle
+        public string LastNeedle
         {
             get { return _data.NeedleSet.LastOrDefault(); }
             set { _data.NeedleSet.Add(value); }
         }
-        
+        public string[] Needles => _data.NeedleSet.Reverse().ToArray();
+
         private string _fileName;
         private SettingsData _data;
 
@@ -61,6 +65,17 @@ namespace jsiFindFile
             }
         }
 
+        public void ClearNeedleHistory()
+        {
+            _data.NeedleSet = new HashSet<string>();
+            Save();
+        }
+
+        public void ClearIncludeHistory()
+        {
+            _data.IncludeFilterSet = new HashSet<string>();
+            Save();
+        }
         public void Save()
         {
             var tempFile = _fileName + ".tmp";

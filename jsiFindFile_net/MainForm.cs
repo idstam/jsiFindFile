@@ -48,10 +48,10 @@ namespace jsiGrepWinForm
             SaveSearchSettings();
 
 
-            _includeFilters = includeTextBox.Text.ToUpperInvariant().Split('|');
+            _includeFilters = includeCombo.Text.ToUpperInvariant().Split('|');
             _excludeFilters = excludeTextBox.Text.ToUpperInvariant().Split('|');
 
-            _currentSearch = new SearchManager(_includeFilters, _excludeFilters, needleTextBox.Text, subFoldersCheckBox.Checked);
+            _currentSearch = new SearchManager(_includeFilters, _excludeFilters, needleCombo.Text, subFoldersCheckBox.Checked);
             _currentSearch.FoundMatch += Search_FoundMatch;
             _currentSearch.SearchingFolder += Search_SearchingFolder;
             object haystack;
@@ -100,9 +100,9 @@ namespace jsiGrepWinForm
         
         private void SaveSearchSettings()
         {
-            _settings.Needle = needleTextBox.Text;
+            _settings.LastNeedle = needleCombo.Text;
             _settings.SearchRoot = rootFolderTextBox.Text;
-            _settings.IncludeFilter = includeTextBox.Text;
+            _settings.LastIncludeFilter = includeCombo.Text;
             _settings.ExcludeFilter = excludeTextBox.Text;
             _settings.Save();
         }
@@ -155,9 +155,16 @@ namespace jsiGrepWinForm
 
         private void LoadSearchSettings()
         {
-            needleTextBox.Text = _settings.Needle;
+            needleCombo.Text = _settings.LastNeedle;
+            needleCombo.Items.Clear();
+            needleCombo.Items.AddRange(_settings.Needles);
+
             rootFolderTextBox.Text = _settings.SearchRoot;
-            includeTextBox.Text = _settings.IncludeFilter;
+
+            includeCombo.Items.Clear();
+            includeCombo.Items.AddRange(_settings.IncludeFilters);
+            includeCombo.Text = _settings.LastIncludeFilter;
+            
             excludeTextBox.Text = _settings.ExcludeFilter;
         }
 
@@ -224,6 +231,18 @@ namespace jsiGrepWinForm
                 sb.AppendLine(item.SubItems[2].Text + @"\" + item.SubItems[0].Text);
             }
             Clipboard.SetText(sb.ToString());
+        }
+
+        private void clearIncludeHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _settings.ClearIncludeHistory();
+            LoadSearchSettings();
+        }
+
+        private void clearNeedleHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _settings.ClearNeedleHistory();
+            LoadSearchSettings();
         }
     }
 }

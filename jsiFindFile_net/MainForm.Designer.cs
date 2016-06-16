@@ -34,7 +34,6 @@
             this.rootFolderTextBox = new System.Windows.Forms.TextBox();
             this.openFolderButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.needleTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lstResults = new System.Windows.Forms.ListView();
             this.nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -45,11 +44,11 @@
             this.openContainingFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyFullPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyFilenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyFileResultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchButton = new System.Windows.Forms.Button();
             this.usePreviousCheckBox = new System.Windows.Forms.CheckBox();
             this.searchingLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.includeTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.excludeTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -59,10 +58,17 @@
             this.tabLines = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.subFoldersCheckBox = new System.Windows.Forms.CheckBox();
-            this.copyFileResultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.includeCombo = new System.Windows.Forms.ComboBox();
+            this.needleCombo = new System.Windows.Forms.ComboBox();
+            this.needlePopUp = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.clearNeedleHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.includePopUp = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.clearIncludeHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resultPopUp.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabFiles.SuspendLayout();
+            this.needlePopUp.SuspendLayout();
+            this.includePopUp.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -83,7 +89,7 @@
             this.rootFolderTextBox.Location = new System.Drawing.Point(114, 8);
             this.rootFolderTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rootFolderTextBox.Name = "rootFolderTextBox";
-            this.rootFolderTextBox.Size = new System.Drawing.Size(814, 24);
+            this.rootFolderTextBox.Size = new System.Drawing.Size(819, 24);
             this.rootFolderTextBox.TabIndex = 1;
             // 
             // openFolderButton
@@ -99,20 +105,10 @@
             this.openFolderButton.UseVisualStyleBackColor = true;
             this.openFolderButton.Click += new System.EventHandler(this.openFolderButton_Click);
             // 
-            // needleTextBox
-            // 
-            this.needleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.needleTextBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.needleTextBox.Location = new System.Drawing.Point(114, 43);
-            this.needleTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.needleTextBox.Name = "needleTextBox";
-            this.needleTextBox.Size = new System.Drawing.Size(814, 24);
-            this.needleTextBox.TabIndex = 4;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ContextMenuStrip = this.needlePopUp;
             this.label2.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(1, 46);
             this.label2.Name = "label2";
@@ -164,7 +160,7 @@
             this.copyFilenameToolStripMenuItem,
             this.copyFileResultToolStripMenuItem});
             this.resultPopUp.Name = "resultPopUp";
-            this.resultPopUp.Size = new System.Drawing.Size(202, 136);
+            this.resultPopUp.Size = new System.Drawing.Size(202, 114);
             this.resultPopUp.Opening += new System.ComponentModel.CancelEventHandler(this.resultPopUp_Opening);
             // 
             // editToolStripMenuItem
@@ -194,6 +190,13 @@
             this.copyFilenameToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.copyFilenameToolStripMenuItem.Text = "Copy Filename";
             this.copyFilenameToolStripMenuItem.Click += new System.EventHandler(this.copyFilenameToolStripMenuItem_Click);
+            // 
+            // copyFileResultToolStripMenuItem
+            // 
+            this.copyFileResultToolStripMenuItem.Name = "copyFileResultToolStripMenuItem";
+            this.copyFileResultToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.copyFileResultToolStripMenuItem.Text = "Copy All";
+            this.copyFileResultToolStripMenuItem.Click += new System.EventHandler(this.copyFileResultToolStripMenuItem_Click);
             // 
             // searchButton
             // 
@@ -242,20 +245,10 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Search in:";
             // 
-            // includeTextBox
-            // 
-            this.includeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.includeTextBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.includeTextBox.Location = new System.Drawing.Point(114, 77);
-            this.includeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.includeTextBox.Name = "includeTextBox";
-            this.includeTextBox.Size = new System.Drawing.Size(814, 24);
-            this.includeTextBox.TabIndex = 11;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.ContextMenuStrip = this.includePopUp;
             this.label4.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(1, 81);
             this.label4.Name = "label4";
@@ -270,10 +263,10 @@
             this.excludeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.excludeTextBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.excludeTextBox.Location = new System.Drawing.Point(114, 112);
+            this.excludeTextBox.Location = new System.Drawing.Point(114, 109);
             this.excludeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.excludeTextBox.Name = "excludeTextBox";
-            this.excludeTextBox.Size = new System.Drawing.Size(814, 24);
+            this.excludeTextBox.Size = new System.Drawing.Size(819, 24);
             this.excludeTextBox.TabIndex = 13;
             // 
             // label5
@@ -339,29 +332,70 @@
             this.subFoldersCheckBox.Text = "Search in sub folders";
             this.subFoldersCheckBox.UseVisualStyleBackColor = true;
             // 
-            // copyFileResultToolStripMenuItem
+            // includeCombo
             // 
-            this.copyFileResultToolStripMenuItem.Name = "copyFileResultToolStripMenuItem";
-            this.copyFileResultToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.copyFileResultToolStripMenuItem.Text = "Copy All";
-            this.copyFileResultToolStripMenuItem.Click += new System.EventHandler(this.copyFileResultToolStripMenuItem_Click);
+            this.includeCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.includeCombo.FormattingEnabled = true;
+            this.includeCombo.Location = new System.Drawing.Point(114, 75);
+            this.includeCombo.Name = "includeCombo";
+            this.includeCombo.Size = new System.Drawing.Size(819, 25);
+            this.includeCombo.TabIndex = 16;
+            // 
+            // needleCombo
+            // 
+            this.needleCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.needleCombo.FormattingEnabled = true;
+            this.needleCombo.Location = new System.Drawing.Point(114, 41);
+            this.needleCombo.Name = "needleCombo";
+            this.needleCombo.Size = new System.Drawing.Size(819, 25);
+            this.needleCombo.TabIndex = 17;
+            // 
+            // needlePopUp
+            // 
+            this.needlePopUp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearNeedleHistoryToolStripMenuItem});
+            this.needlePopUp.Name = "needlePopUp";
+            this.needlePopUp.Size = new System.Drawing.Size(143, 26);
+            // 
+            // clearNeedleHistoryToolStripMenuItem
+            // 
+            this.clearNeedleHistoryToolStripMenuItem.Name = "clearNeedleHistoryToolStripMenuItem";
+            this.clearNeedleHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.clearNeedleHistoryToolStripMenuItem.Text = "Clear History";
+            this.clearNeedleHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearNeedleHistoryToolStripMenuItem_Click);
+            // 
+            // includePopUp
+            // 
+            this.includePopUp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearIncludeHistoryToolStripMenuItem});
+            this.includePopUp.Name = "needlePopUp";
+            this.includePopUp.Size = new System.Drawing.Size(143, 26);
+            // 
+            // clearIncludeHistoryToolStripMenuItem
+            // 
+            this.clearIncludeHistoryToolStripMenuItem.Name = "clearIncludeHistoryToolStripMenuItem";
+            this.clearIncludeHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.clearIncludeHistoryToolStripMenuItem.Text = "Clear History";
+            this.clearIncludeHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearIncludeHistoryToolStripMenuItem_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 483);
+            this.Controls.Add(this.needleCombo);
+            this.Controls.Add(this.includeCombo);
             this.Controls.Add(this.subFoldersCheckBox);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.excludeTextBox);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.includeTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.searchingLabel);
             this.Controls.Add(this.usePreviousCheckBox);
             this.Controls.Add(this.searchButton);
-            this.Controls.Add(this.needleTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.openFolderButton);
             this.Controls.Add(this.rootFolderTextBox);
@@ -375,6 +409,8 @@
             this.resultPopUp.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabFiles.ResumeLayout(false);
+            this.needlePopUp.ResumeLayout(false);
+            this.includePopUp.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -386,7 +422,6 @@
         private System.Windows.Forms.TextBox rootFolderTextBox;
         private System.Windows.Forms.Button openFolderButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.TextBox needleTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView lstResults;
         private System.Windows.Forms.ColumnHeader nameColumnHeader;
@@ -396,7 +431,6 @@
         private System.Windows.Forms.CheckBox usePreviousCheckBox;
         private System.Windows.Forms.Label searchingLabel;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox includeTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox excludeTextBox;
         private System.Windows.Forms.Label label5;
@@ -412,6 +446,12 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.CheckBox subFoldersCheckBox;
         private System.Windows.Forms.ToolStripMenuItem copyFileResultToolStripMenuItem;
+        private System.Windows.Forms.ComboBox includeCombo;
+        private System.Windows.Forms.ComboBox needleCombo;
+        private System.Windows.Forms.ContextMenuStrip needlePopUp;
+        private System.Windows.Forms.ToolStripMenuItem clearNeedleHistoryToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip includePopUp;
+        private System.Windows.Forms.ToolStripMenuItem clearIncludeHistoryToolStripMenuItem;
     }
 }
 
