@@ -35,6 +35,8 @@
             this.openFolderButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.label2 = new System.Windows.Forms.Label();
+            this.needlePopUp = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.clearNeedleHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lstResults = new System.Windows.Forms.ListView();
             this.nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.matchesColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -50,6 +52,8 @@
             this.searchingLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.includePopUp = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.clearIncludeHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excludeTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -60,15 +64,17 @@
             this.subFoldersCheckBox = new System.Windows.Forms.CheckBox();
             this.includeCombo = new System.Windows.Forms.ComboBox();
             this.needleCombo = new System.Windows.Forms.ComboBox();
-            this.needlePopUp = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.clearNeedleHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.includePopUp = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.clearIncludeHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lstLines = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.needlePopUp.SuspendLayout();
             this.resultPopUp.SuspendLayout();
+            this.includePopUp.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabFiles.SuspendLayout();
-            this.needlePopUp.SuspendLayout();
-            this.includePopUp.SuspendLayout();
+            this.tabLines.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -78,7 +84,7 @@
             this.label1.Location = new System.Drawing.Point(1, 187);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 17);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 11;
             this.label1.Text = "Searching:";
             // 
             // rootFolderTextBox
@@ -116,6 +122,20 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Search for:";
             this.toolTip1.SetToolTip(this.label2, "There\'s a context menue here. Try to right click.");
+            // 
+            // needlePopUp
+            // 
+            this.needlePopUp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearNeedleHistoryToolStripMenuItem});
+            this.needlePopUp.Name = "needlePopUp";
+            this.needlePopUp.Size = new System.Drawing.Size(143, 26);
+            // 
+            // clearNeedleHistoryToolStripMenuItem
+            // 
+            this.clearNeedleHistoryToolStripMenuItem.Name = "clearNeedleHistoryToolStripMenuItem";
+            this.clearNeedleHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.clearNeedleHistoryToolStripMenuItem.Text = "Clear History";
+            this.clearNeedleHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearNeedleHistoryToolStripMenuItem_Click);
             // 
             // lstResults
             // 
@@ -207,7 +227,7 @@
             this.searchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(83, 31);
-            this.searchButton.TabIndex = 6;
+            this.searchButton.TabIndex = 13;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
@@ -220,7 +240,7 @@
             this.usePreviousCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.usePreviousCheckBox.Name = "usePreviousCheckBox";
             this.usePreviousCheckBox.Size = new System.Drawing.Size(214, 21);
-            this.usePreviousCheckBox.TabIndex = 7;
+            this.usePreviousCheckBox.TabIndex = 10;
             this.usePreviousCheckBox.Text = "Search in previously found files";
             this.usePreviousCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -233,7 +253,7 @@
             this.searchingLabel.Location = new System.Drawing.Point(90, 187);
             this.searchingLabel.Name = "searchingLabel";
             this.searchingLabel.Size = new System.Drawing.Size(794, 18);
-            this.searchingLabel.TabIndex = 8;
+            this.searchingLabel.TabIndex = 12;
             this.searchingLabel.Text = "...";
             // 
             // label3
@@ -243,7 +263,7 @@
             this.label3.Location = new System.Drawing.Point(1, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 17);
-            this.label3.TabIndex = 9;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Search in:";
             // 
             // label4
@@ -254,10 +274,24 @@
             this.label4.Location = new System.Drawing.Point(1, 81);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(110, 17);
-            this.label4.TabIndex = 10;
+            this.label4.TabIndex = 5;
             this.label4.Text = "Include filetypes:";
             this.toolTip1.SetToolTip(this.label4, "Pipe separated list of file types to include in the search. Example: *.bas|*.vb|*" +
         ".frm|*.cls|*.cs|*.sql");
+            // 
+            // includePopUp
+            // 
+            this.includePopUp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearIncludeHistoryToolStripMenuItem});
+            this.includePopUp.Name = "needlePopUp";
+            this.includePopUp.Size = new System.Drawing.Size(143, 26);
+            // 
+            // clearIncludeHistoryToolStripMenuItem
+            // 
+            this.clearIncludeHistoryToolStripMenuItem.Name = "clearIncludeHistoryToolStripMenuItem";
+            this.clearIncludeHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.clearIncludeHistoryToolStripMenuItem.Text = "Clear History";
+            this.clearIncludeHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearIncludeHistoryToolStripMenuItem_Click);
             // 
             // excludeTextBox
             // 
@@ -268,7 +302,7 @@
             this.excludeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.excludeTextBox.Name = "excludeTextBox";
             this.excludeTextBox.Size = new System.Drawing.Size(819, 24);
-            this.excludeTextBox.TabIndex = 13;
+            this.excludeTextBox.TabIndex = 8;
             // 
             // label5
             // 
@@ -277,7 +311,7 @@
             this.label5.Location = new System.Drawing.Point(1, 115);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(105, 17);
-            this.label5.TabIndex = 12;
+            this.label5.TabIndex = 7;
             this.label5.Text = "Exclude folders:";
             this.toolTip1.SetToolTip(this.label5, "Pipe separated list of folders to ignore while searching. Example .git|bin|obj");
             // 
@@ -311,6 +345,7 @@
             // 
             // tabLines
             // 
+            this.tabLines.Controls.Add(this.lstLines);
             this.tabLines.Location = new System.Drawing.Point(4, 26);
             this.tabLines.Name = "tabLines";
             this.tabLines.Padding = new System.Windows.Forms.Padding(3);
@@ -329,7 +364,7 @@
             this.subFoldersCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.subFoldersCheckBox.Name = "subFoldersCheckBox";
             this.subFoldersCheckBox.Size = new System.Drawing.Size(153, 21);
-            this.subFoldersCheckBox.TabIndex = 15;
+            this.subFoldersCheckBox.TabIndex = 9;
             this.subFoldersCheckBox.Text = "Search in sub folders";
             this.subFoldersCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -341,7 +376,7 @@
             this.includeCombo.Location = new System.Drawing.Point(114, 75);
             this.includeCombo.Name = "includeCombo";
             this.includeCombo.Size = new System.Drawing.Size(819, 25);
-            this.includeCombo.TabIndex = 16;
+            this.includeCombo.TabIndex = 6;
             // 
             // needleCombo
             // 
@@ -351,35 +386,47 @@
             this.needleCombo.Location = new System.Drawing.Point(114, 41);
             this.needleCombo.Name = "needleCombo";
             this.needleCombo.Size = new System.Drawing.Size(819, 25);
-            this.needleCombo.TabIndex = 17;
+            this.needleCombo.TabIndex = 4;
             // 
-            // needlePopUp
+            // lstLines
             // 
-            this.needlePopUp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearNeedleHistoryToolStripMenuItem});
-            this.needlePopUp.Name = "needlePopUp";
-            this.needlePopUp.Size = new System.Drawing.Size(143, 26);
+            this.lstLines.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader4,
+            this.columnHeader3});
+            this.lstLines.ContextMenuStrip = this.resultPopUp;
+            this.lstLines.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstLines.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstLines.FullRowSelect = true;
+            this.lstLines.Location = new System.Drawing.Point(3, 3);
+            this.lstLines.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lstLines.Name = "lstLines";
+            this.lstLines.ShowItemToolTips = true;
+            this.lstLines.Size = new System.Drawing.Size(955, 231);
+            this.lstLines.TabIndex = 6;
+            this.lstLines.UseCompatibleStateImageBehavior = false;
+            this.lstLines.View = System.Windows.Forms.View.Details;
             // 
-            // clearNeedleHistoryToolStripMenuItem
+            // columnHeader1
             // 
-            this.clearNeedleHistoryToolStripMenuItem.Name = "clearNeedleHistoryToolStripMenuItem";
-            this.clearNeedleHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.clearNeedleHistoryToolStripMenuItem.Text = "Clear History";
-            this.clearNeedleHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearNeedleHistoryToolStripMenuItem_Click);
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 126;
             // 
-            // includePopUp
+            // columnHeader2
             // 
-            this.includePopUp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearIncludeHistoryToolStripMenuItem});
-            this.includePopUp.Name = "needlePopUp";
-            this.includePopUp.Size = new System.Drawing.Size(143, 26);
+            this.columnHeader2.Text = "Line";
+            this.columnHeader2.Width = 52;
             // 
-            // clearIncludeHistoryToolStripMenuItem
+            // columnHeader3
             // 
-            this.clearIncludeHistoryToolStripMenuItem.Name = "clearIncludeHistoryToolStripMenuItem";
-            this.clearIncludeHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.clearIncludeHistoryToolStripMenuItem.Text = "Clear History";
-            this.clearIncludeHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearIncludeHistoryToolStripMenuItem_Click);
+            this.columnHeader3.Text = "Path";
+            this.columnHeader3.Width = 100;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Text";
+            this.columnHeader4.Width = 618;
             // 
             // MainForm
             // 
@@ -407,11 +454,12 @@
             this.Name = "MainForm";
             this.Text = "jsiGrep";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.needlePopUp.ResumeLayout(false);
             this.resultPopUp.ResumeLayout(false);
+            this.includePopUp.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabFiles.ResumeLayout(false);
-            this.needlePopUp.ResumeLayout(false);
-            this.includePopUp.ResumeLayout(false);
+            this.tabLines.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -453,6 +501,11 @@
         private System.Windows.Forms.ToolStripMenuItem clearNeedleHistoryToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip includePopUp;
         private System.Windows.Forms.ToolStripMenuItem clearIncludeHistoryToolStripMenuItem;
+        private System.Windows.Forms.ListView lstLines;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
 

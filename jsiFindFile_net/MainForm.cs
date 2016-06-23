@@ -91,8 +91,18 @@ namespace jsiGrepWinForm
                 fileItem.SubItems.Add(match.FilePath);
                 fileItem.ToolTipText = match.ToToolTipString();
                 lstResults.Invoke((MethodInvoker) (() => lstResults.Items.Add(fileItem)));
-                Application.DoEvents();
                 
+
+                foreach (var line in match.MatchLines)
+                {
+                    var lineItem = new ListViewItem();
+                    lineItem.Text = match.FileName;
+                    lineItem.SubItems.Add(line.LineNumber.ToString());
+                    lineItem.SubItems.Add(line.Line);
+                    lineItem.SubItems.Add(match.FilePath);
+                    lstLines.Invoke((MethodInvoker)(() => lstLines.Items.Add(lineItem)));
+                }
+                Application.DoEvents();
             }
             
 
@@ -175,6 +185,7 @@ namespace jsiGrepWinForm
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var lvw = tabControl1.SelectedTab == tabFiles ? lstResults : lstLines;
             var editorPath = Properties.Settings.Default.textEditor;
             if (!File.Exists(editorPath))
             {
@@ -184,40 +195,43 @@ namespace jsiGrepWinForm
                 Properties.Settings.Default.textEditor = editorPath;
                 Properties.Settings.Default.Save();
             }
-            if (lstResults.SelectedItems.Count > 0)
+            if (lvw.SelectedItems.Count > 0)
             {
-                var item = lstResults.SelectedItems[0];
-                var fullPath = Path.Combine(item.SubItems[2].Text, item.SubItems[0].Text);
+                var item = lvw.SelectedItems[0];
+                var fullPath = Path.Combine(item.SubItems[item.SubItems.Count -1].Text, item.SubItems[0].Text);
                 Process.Start(editorPath, "\"" + fullPath + "\"");
             }
         }
 
         private void openContainingFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (lstResults.SelectedItems.Count > 0)
+            var lvw = tabControl1.SelectedTab == tabFiles ? lstResults : lstLines;
+            if (lvw.SelectedItems.Count > 0)
             {
-                var item = lstResults.SelectedItems[0];
+                var item = lvw.SelectedItems[0];
                 
-                Process.Start("explorer.exe", "\"" + item.SubItems[2].Text + "\"");
+                Process.Start("explorer.exe", "\"" + item.SubItems[item.SubItems.Count-1].Text + "\"");
             }
 
         }
 
         private void copyFullPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (lstResults.SelectedItems.Count > 0)
+            var lvw = tabControl1.SelectedTab == tabFiles ? lstResults : lstLines;
+            if (lvw.SelectedItems.Count > 0)
             {
-                var item = lstResults.SelectedItems[0];
-                var fullPath = Path.Combine(item.SubItems[2].Text, item.SubItems[0].Text);
+                var item = lvw.SelectedItems[0];
+                var fullPath = Path.Combine(item.SubItems[item.SubItems.Count-1].Text, item.SubItems[0].Text);
                 Clipboard.SetText(fullPath);
             }
         }
 
         private void copyFilenameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (lstResults.SelectedItems.Count > 0)
+            var lvw = tabControl1.SelectedTab == tabFiles ? lstResults : lstLines;
+            if (lvw.SelectedItems.Count > 0)
             {
-                var item = lstResults.SelectedItems[0];
+                var item = lvw.SelectedItems[0];
                 Clipboard.SetText(item.SubItems[0].Text);
             }
 
@@ -226,9 +240,19 @@ namespace jsiGrepWinForm
         private void copyFileResultToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var sb = new StringBuilder();
-            foreach (ListViewItem item in lstResults.Items)
+            if(tabControl1.SelectedTab == tabFiles)
+            {  
+                foreach (ListViewItem item in lstResults.Items)
+                {
+                    sb.AppendLine(item.SubItems[2].Text + @"\" + item.SubItems[0].Text);
+                }
+            }
+            else
             {
-                sb.AppendLine(item.SubItems[2].Text + @"\" + item.SubItems[0].Text);
+                foreach (ListViewItem item in lstLines.Items)
+                {
+                    sb.AppendLine(item.SubItems[3].Text + @"\" + item.SubItems[0].Text + "\t" + item.SubItems[2].Text);
+                }
             }
             Clipboard.SetText(sb.ToString());
         }
