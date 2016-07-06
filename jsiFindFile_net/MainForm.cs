@@ -32,7 +32,7 @@ namespace jsiGrepWinForm
         private void openFolderButton_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.ShowDialog();
-            rootFolderTextBox.Text = folderBrowserDialog1.SelectedPath;
+            rootFolderCombo.Text = folderBrowserDialog1.SelectedPath;
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -62,9 +62,10 @@ namespace jsiGrepWinForm
             }
             else
             {
-                haystack = rootFolderTextBox.Text;
+                haystack = rootFolderCombo.Text;
             }
             lstResults.Items.Clear();
+            lstLines.Items.Clear();
             _currentSearch.Search(haystack);
             
             ToggleSearchState(false);
@@ -111,7 +112,7 @@ namespace jsiGrepWinForm
         private void SaveSearchSettings()
         {
             _settings.LastNeedle = needleCombo.Text;
-            _settings.SearchRoot = rootFolderTextBox.Text;
+            _settings.LastSearchRoot = rootFolderCombo.Text;
             _settings.LastIncludeFilter = includeCombo.Text;
             _settings.ExcludeFilter = excludeTextBox.Text;
             _settings.Save();
@@ -169,7 +170,9 @@ namespace jsiGrepWinForm
             needleCombo.Items.Clear();
             needleCombo.Items.AddRange(_settings.Needles);
 
-            rootFolderTextBox.Text = _settings.SearchRoot;
+            rootFolderCombo.Text = _settings.LastSearchRoot;
+            rootFolderCombo.Items.Clear();
+            rootFolderCombo.Items.AddRange(_settings.SearchRoots);
 
             includeCombo.Items.Clear();
             includeCombo.Items.AddRange(_settings.IncludeFilters);

@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
-            this.rootFolderTextBox = new System.Windows.Forms.TextBox();
             this.openFolderButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.label2 = new System.Windows.Forms.Label();
@@ -60,15 +59,16 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabFiles = new System.Windows.Forms.TabPage();
             this.tabLines = new System.Windows.Forms.TabPage();
+            this.lstLines = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.subFoldersCheckBox = new System.Windows.Forms.CheckBox();
             this.includeCombo = new System.Windows.Forms.ComboBox();
             this.needleCombo = new System.Windows.Forms.ComboBox();
-            this.lstLines = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.rootFolderCombo = new System.Windows.Forms.ComboBox();
             this.needlePopUp.SuspendLayout();
             this.resultPopUp.SuspendLayout();
             this.includePopUp.SuspendLayout();
@@ -86,17 +86,6 @@
             this.label1.Size = new System.Drawing.Size(73, 17);
             this.label1.TabIndex = 11;
             this.label1.Text = "Searching:";
-            // 
-            // rootFolderTextBox
-            // 
-            this.rootFolderTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rootFolderTextBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rootFolderTextBox.Location = new System.Drawing.Point(114, 8);
-            this.rootFolderTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.rootFolderTextBox.Name = "rootFolderTextBox";
-            this.rootFolderTextBox.Size = new System.Drawing.Size(819, 24);
-            this.rootFolderTextBox.TabIndex = 1;
             // 
             // openFolderButton
             // 
@@ -298,7 +287,7 @@
             this.excludeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.excludeTextBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.excludeTextBox.Location = new System.Drawing.Point(114, 109);
+            this.excludeTextBox.Location = new System.Drawing.Point(114, 112);
             this.excludeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.excludeTextBox.Name = "excludeTextBox";
             this.excludeTextBox.Size = new System.Drawing.Size(819, 24);
@@ -354,40 +343,6 @@
             this.tabLines.Text = "Lines";
             this.tabLines.UseVisualStyleBackColor = true;
             // 
-            // subFoldersCheckBox
-            // 
-            this.subFoldersCheckBox.AutoSize = true;
-            this.subFoldersCheckBox.Checked = true;
-            this.subFoldersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.subFoldersCheckBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.subFoldersCheckBox.Location = new System.Drawing.Point(114, 144);
-            this.subFoldersCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.subFoldersCheckBox.Name = "subFoldersCheckBox";
-            this.subFoldersCheckBox.Size = new System.Drawing.Size(153, 21);
-            this.subFoldersCheckBox.TabIndex = 9;
-            this.subFoldersCheckBox.Text = "Search in sub folders";
-            this.subFoldersCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // includeCombo
-            // 
-            this.includeCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.includeCombo.FormattingEnabled = true;
-            this.includeCombo.Location = new System.Drawing.Point(114, 75);
-            this.includeCombo.Name = "includeCombo";
-            this.includeCombo.Size = new System.Drawing.Size(819, 25);
-            this.includeCombo.TabIndex = 6;
-            // 
-            // needleCombo
-            // 
-            this.needleCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.needleCombo.FormattingEnabled = true;
-            this.needleCombo.Location = new System.Drawing.Point(114, 41);
-            this.needleCombo.Name = "needleCombo";
-            this.needleCombo.Size = new System.Drawing.Size(819, 25);
-            this.needleCombo.TabIndex = 4;
-            // 
             // lstLines
             // 
             this.lstLines.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -418,21 +373,66 @@
             this.columnHeader2.Text = "Line";
             this.columnHeader2.Width = 52;
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Text";
+            this.columnHeader4.Width = 618;
+            // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Path";
             this.columnHeader3.Width = 100;
             // 
-            // columnHeader4
+            // subFoldersCheckBox
             // 
-            this.columnHeader4.Text = "Text";
-            this.columnHeader4.Width = 618;
+            this.subFoldersCheckBox.AutoSize = true;
+            this.subFoldersCheckBox.Checked = true;
+            this.subFoldersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.subFoldersCheckBox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subFoldersCheckBox.Location = new System.Drawing.Point(114, 144);
+            this.subFoldersCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.subFoldersCheckBox.Name = "subFoldersCheckBox";
+            this.subFoldersCheckBox.Size = new System.Drawing.Size(153, 21);
+            this.subFoldersCheckBox.TabIndex = 9;
+            this.subFoldersCheckBox.Text = "Search in sub folders";
+            this.subFoldersCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // includeCombo
+            // 
+            this.includeCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.includeCombo.FormattingEnabled = true;
+            this.includeCombo.Location = new System.Drawing.Point(114, 78);
+            this.includeCombo.Name = "includeCombo";
+            this.includeCombo.Size = new System.Drawing.Size(819, 25);
+            this.includeCombo.TabIndex = 6;
+            // 
+            // needleCombo
+            // 
+            this.needleCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.needleCombo.FormattingEnabled = true;
+            this.needleCombo.Location = new System.Drawing.Point(114, 43);
+            this.needleCombo.Name = "needleCombo";
+            this.needleCombo.Size = new System.Drawing.Size(819, 25);
+            this.needleCombo.TabIndex = 4;
+            // 
+            // rootFolderCombo
+            // 
+            this.rootFolderCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rootFolderCombo.FormattingEnabled = true;
+            this.rootFolderCombo.Location = new System.Drawing.Point(114, 10);
+            this.rootFolderCombo.Name = "rootFolderCombo";
+            this.rootFolderCombo.Size = new System.Drawing.Size(819, 25);
+            this.rootFolderCombo.TabIndex = 15;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 483);
+            this.Controls.Add(this.rootFolderCombo);
             this.Controls.Add(this.needleCombo);
             this.Controls.Add(this.includeCombo);
             this.Controls.Add(this.subFoldersCheckBox);
@@ -446,7 +446,6 @@
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.openFolderButton);
-            this.Controls.Add(this.rootFolderTextBox);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -468,7 +467,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox rootFolderTextBox;
         private System.Windows.Forms.Button openFolderButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label label2;
@@ -506,6 +504,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ComboBox rootFolderCombo;
     }
 }
 

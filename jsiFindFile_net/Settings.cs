@@ -24,11 +24,12 @@ namespace jsiFindFile
             set { _data.ExcludeFilterSet.Add(value); }
         }
 
-        public string SearchRoot
+        public string LastSearchRoot
         {
             get { return _data.SearchRootSet.LastOrDefault(); }
             set { _data.SearchRootSet.Add(value); }
         }
+        public string[] SearchRoots => _data.SearchRootSet.Reverse().ToArray();
 
         public string LastNeedle
         {
