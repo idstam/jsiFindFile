@@ -83,6 +83,8 @@ namespace jsiGrepWinForm
 
         private void Search_FoundMatch(object sender, EventArgs m)
         {
+            if (_searching) this.Cursor = Cursors.WaitCursor;
+
             Application.DoEvents();
 
             Match match = (m as MatchEventArgs)?.Match;
