@@ -83,6 +83,8 @@ namespace jsiGrepWinForm
 
         private void Search_FoundMatch(object sender, EventArgs m)
         {
+            Application.DoEvents();
+
             Match match = (m as MatchEventArgs)?.Match;
             if (match != null)
             {
@@ -103,7 +105,6 @@ namespace jsiGrepWinForm
                     lineItem.SubItems.Add(match.FilePath);
                     lstLines.Invoke((MethodInvoker)(() => lstLines.Items.Add(lineItem)));
                 }
-                Application.DoEvents();
             }
             
 

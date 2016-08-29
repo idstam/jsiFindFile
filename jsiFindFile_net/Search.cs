@@ -136,10 +136,9 @@ namespace jsiGrepWinForm
                     	Line = line,
                         LineNumber = lineNumber,
                         Position = index
-                    });
-
-                    
+                    });                    
                 }
+                if (_stop) break;
             }
             if (match.MatchLines.Any())
             {
@@ -148,6 +147,7 @@ namespace jsiGrepWinForm
             }
             else
             {
+                OnFoundMatch(new MatchEventArgs { Match = null });
                 return null;
             }
             
