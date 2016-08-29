@@ -52,6 +52,8 @@ namespace jsiGrepWinForm
             {
                 foreach (var folder in folderContent.Item2)
                 {
+                    if(ExcludePathContaining(folder)) continue;
+
                     if (_stop) return matches;
                     Search(folder, matches);
                 }

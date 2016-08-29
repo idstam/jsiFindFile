@@ -127,14 +127,14 @@ namespace jsiGrepWinForm
 
             if (searching)
             {
-                Cursor.Current = Cursors.WaitCursor;
+                this.Cursor = Cursors.WaitCursor;
                 searchButton.Text = "Stop";
                 _stop = false;
                 searchingLabel.Text = "...";
             }
             else
             {
-                Cursor.Current = Cursors.Default;
+                this.Cursor = Cursors.Default;
                 searchButton.Text = "Search";
                 _stop = true;
                 _currentSearch.Stop();
