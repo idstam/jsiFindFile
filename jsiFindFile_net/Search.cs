@@ -110,7 +110,7 @@ namespace jsiGrepWinForm
 
             foreach (var filter in _excludeFilters)
             {
-                if (filename.ToUpperInvariant().Contains(filter))
+                if (filename.IndexOf(filter, StringComparison.InvariantCultureIgnoreCase) >= 0)
                 {
                     return true;
                 }
@@ -120,21 +120,22 @@ namespace jsiGrepWinForm
 
         private Match SearchFile(string fileName)
         {
-            var needle = _needle.ToUpperInvariant();
             var match = new Match(fileName, _needle);
 
             var lineNumber = 0;
             foreach(var line in File.ReadLines(fileName))
             {
                 lineNumber++;
-                var upperLine = line.ToUpperInvariant();
-                if (upperLine.Contains(needle))
+                //var upperLine = line.ToUpperInvariant();
+                //if (upperLine.Contains(needle))
+                int index = line.IndexOf(_needle, StringComparison.InvariantCultureIgnoreCase);
+                if (index >= 0 )
                 {
                     match.MatchLines.Add(new MatchLine()
                     {
                     	Line = line,
                         LineNumber = lineNumber,
-                        Position = upperLine.IndexOf(needle, StringComparison.InvariantCultureIgnoreCase)
+                        Position = index
                     });
 
                     
