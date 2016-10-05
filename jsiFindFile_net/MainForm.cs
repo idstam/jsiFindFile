@@ -20,6 +20,7 @@ namespace jsiGrepWinForm
 
         private string[] _includeFilters;
         private string[] _excludeFilters;
+        private string[] _droppedFiles = null;
         private bool _stop = false;
         private bool _searching = false;
         private SearchManager _currentSearch = null;
@@ -146,11 +147,15 @@ namespace jsiGrepWinForm
         private List<string> GetOldFileList()
         {
             var result = new List<string>();
+            if (_droppedFiles != null)
+            {
+                return _droppedFiles.ToList();
+            }
+
             foreach (ListViewItem item in lstResults.Items)
             {
                 result.Add(Path.Combine(item.SubItems[2].Text, item.SubItems[0].Text));
             }
-
             return result;
         }
 
@@ -273,6 +278,19 @@ namespace jsiGrepWinForm
         {
             _settings.ClearNeedleHistory();
             LoadSearchSettings();
+        }
+
+        private void MainForm_DragDrop(object sender, DragEventArgs e)
+        {
+            _droppedFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
+            usePreviousCheckBox.Checked = true;
+            searchButton_Click(null, null);
+            _droppedFiles = null;
+        }
+
+        private void MainForm_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         }
     }
 }

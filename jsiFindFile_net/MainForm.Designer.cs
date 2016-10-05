@@ -429,6 +429,7 @@
             // 
             // MainForm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 483);
@@ -453,6 +454,8 @@
             this.Name = "MainForm";
             this.Text = "jsiGrep";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
             this.needlePopUp.ResumeLayout(false);
             this.resultPopUp.ResumeLayout(false);
             this.includePopUp.ResumeLayout(false);
