@@ -167,7 +167,7 @@ namespace jsiGrepWinForm
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Text = "jsiFindFile " + Assembly.GetExecutingAssembly().GetName().Version.Major + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor;
+            this.Text = $@"jsiFindFile {Assembly.GetExecutingAssembly().GetName().Version.Major }.{Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString().PadLeft(2, '0')}";
             LoadSearchSettings();
 
         }
