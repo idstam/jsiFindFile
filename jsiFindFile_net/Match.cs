@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace jsiGrepWinForm
+namespace jsiFindFile
 {
     public class Match
     {
-        public string FileName { get; set; }
+        public string FileName { get; private set; }
 
-        public string FilePath
-        {
-            get { return Path.GetDirectoryName(FullPath); }
-        }
+        public string FilePath => Path.GetDirectoryName(FullPath);
 
-        public List<MatchLine> MatchLines{get;set;}
+        public List<MatchLine> MatchLines{get;}
 		public string Needle { get; set; }
 
         public string FullPath { get; set; }

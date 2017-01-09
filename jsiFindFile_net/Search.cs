@@ -2,24 +2,21 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace jsiGrepWinForm
+namespace jsiFindFile
 {
     public class SearchManager
     {
-        private string _rootFolder;
-        private List<string> _originalFiles;
-        private List<Match> _result;
-        private bool _stop = false;
-        private string[] _includeFilters = null;
-        private string[] _excludeFilters = null;
-        private string _needle;
-        private bool _searchSubFolders;
+        private bool _stop;
+        private readonly string[] _includeFilters;
+        private readonly string[] _excludeFilters;
+        private readonly string _needle;
+        private readonly bool _searchSubFolders;
 
         public SearchManager(string[] includeFilters, string[] excludeFilters, string needle, bool searchSubFolders)
         {
             _includeFilters = includeFilters.Where(f => f != "").ToArray();
+            _excludeFilters = null;
             _excludeFilters = excludeFilters.Where(f => f != "").ToArray();
             _searchSubFolders = searchSubFolders;
             _needle = needle;
@@ -42,8 +39,7 @@ namespace jsiGrepWinForm
         {
             if (matches == null) matches = new List<Match>();
             OnSearchingFolder(new SearchingFolderEventArgs {Folder = rootFolder});
-            
-            _rootFolder = rootFolder;
+
             var folderContent = GetFolderContent(rootFolder);
 
 			matches.AddRange(SearchFiles(folderContent.Item1.ToList()));
@@ -64,7 +60,6 @@ namespace jsiGrepWinForm
 
         private List<Match> Search(List<string> files)
         {
-            _originalFiles = files;
             return SearchFiles(files);
         }
 

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace jsiGrepWinForm
+namespace jsiFindFile
 {
     public static class StringExtensions
     {

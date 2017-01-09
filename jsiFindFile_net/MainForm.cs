@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using jsiFindFile;
 
-namespace jsiGrepWinForm
+namespace jsiFindFile
 {
     public partial class MainForm : Form
     {
@@ -20,11 +16,10 @@ namespace jsiGrepWinForm
 
         private string[] _includeFilters;
         private string[] _excludeFilters;
-        private string[] _droppedFiles = null;
-        private bool _stop = false;
-        private bool _searching = false;
-        private SearchManager _currentSearch = null;
-        private Settings _settings = new Settings();
+        private string[] _droppedFiles;
+        private bool _searching;
+        private SearchManager _currentSearch;
+        private readonly Settings _settings = new Settings();
         public MainForm()
         {
             InitializeComponent();
@@ -56,7 +51,7 @@ namespace jsiGrepWinForm
             _currentSearch.FoundMatch += Search_FoundMatch;
             _currentSearch.SearchingFolder += Search_SearchingFolder;
             object haystack;
-            var matches = new List<Match>();
+
             if (usePreviousCheckBox.Checked)
             {
                 haystack = GetOldFileList();
@@ -130,14 +125,12 @@ namespace jsiGrepWinForm
             {
                 this.Cursor = Cursors.WaitCursor;
                 searchButton.Text = "Stop";
-                _stop = false;
                 searchingLabel.Text = "...";
             }
             else
             {
                 this.Cursor = Cursors.Default;
                 searchButton.Text = "Search";
-                _stop = true;
                 _currentSearch.Stop();
             }
 
@@ -157,12 +150,6 @@ namespace jsiGrepWinForm
                 result.Add(Path.Combine(item.SubItems[2].Text, item.SubItems[0].Text));
             }
             return result;
-        }
-
-
-        private void StopButton_Click(object sender, EventArgs e)
-        {
-            _stop = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -197,14 +184,14 @@ namespace jsiGrepWinForm
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var lvw = tabControl1.SelectedTab == tabFiles ? lstResults : lstLines;
-            var editorPath = Properties.Settings.Default.textEditor;
+            var editorPath = jsiGrepWinForm.Properties.Settings.Default.textEditor;
             if (!File.Exists(editorPath))
             {
                 openFileDialog1.Title = "Select your prefered text editor.";
                 openFileDialog1.ShowDialog();
                 editorPath = openFileDialog1.FileName;
-                Properties.Settings.Default.textEditor = editorPath;
-                Properties.Settings.Default.Save();
+                jsiGrepWinForm.Properties.Settings.Default.textEditor = editorPath;
+                jsiGrepWinForm.Properties.Settings.Default.Save();
             }
             if (lvw.SelectedItems.Count > 0)
             {

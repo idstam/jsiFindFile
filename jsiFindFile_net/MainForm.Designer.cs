@@ -1,4 +1,4 @@
-﻿namespace jsiGrepWinForm
+﻿namespace jsiFindFile
 {
     partial class MainForm
     {
