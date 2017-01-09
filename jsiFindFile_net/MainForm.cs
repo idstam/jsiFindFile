@@ -255,14 +255,14 @@ namespace jsiGrepWinForm
             {  
                 foreach (ListViewItem item in lstResults.Items)
                 {
-                    sb.AppendLine(item.SubItems[2].Text + @"\" + item.SubItems[0].Text);
+                    sb.AppendLine($"{item.SubItems[2].Text}{Path.DirectorySeparatorChar}{item.SubItems[0].Text}"); 
                 }
             }
             else
             {
                 foreach (ListViewItem item in lstLines.Items)
                 {
-                    sb.AppendLine(item.SubItems[3].Text + @"\" + item.SubItems[0].Text + "\t" + item.SubItems[2].Text);
+                    sb.AppendLine($"{item.SubItems[3].Text}{Path.DirectorySeparatorChar}{item.SubItems[0].Text}\t({item.SubItems[1].Text})\t{item.SubItems[2].Text}");
                 }
             }
             Clipboard.SetText(sb.ToString());
