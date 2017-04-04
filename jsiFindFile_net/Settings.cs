@@ -35,6 +35,7 @@ namespace jsiFindFile
         }
         public string[] Needles => _data.NeedleSet.Reverse().ToArray();
 
+
         private string _fileName;
         private SettingsData _data;
 

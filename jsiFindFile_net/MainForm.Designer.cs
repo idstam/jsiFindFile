@@ -69,6 +69,7 @@
             this.includeCombo = new System.Windows.Forms.ComboBox();
             this.needleCombo = new System.Windows.Forms.ComboBox();
             this.rootFolderCombo = new System.Windows.Forms.ComboBox();
+            this.includeFileNamesCheckbox = new System.Windows.Forms.CheckBox();
             this.needlePopUp.SuspendLayout();
             this.resultPopUp.SuspendLayout();
             this.includePopUp.SuspendLayout();
@@ -144,6 +145,7 @@
             this.lstResults.TabIndex = 5;
             this.lstResults.UseCompatibleStateImageBehavior = false;
             this.lstResults.View = System.Windows.Forms.View.Details;
+            this.lstResults.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lstResults_KeyUp);
             // 
             // nameColumnHeader
             // 
@@ -427,12 +429,27 @@
             this.rootFolderCombo.Size = new System.Drawing.Size(819, 25);
             this.rootFolderCombo.TabIndex = 15;
             // 
+            // includeFileNamesCheckbox
+            // 
+            this.includeFileNamesCheckbox.AutoSize = true;
+            this.includeFileNamesCheckbox.Checked = true;
+            this.includeFileNamesCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.includeFileNamesCheckbox.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.includeFileNamesCheckbox.Location = new System.Drawing.Point(493, 144);
+            this.includeFileNamesCheckbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.includeFileNamesCheckbox.Name = "includeFileNamesCheckbox";
+            this.includeFileNamesCheckbox.Size = new System.Drawing.Size(134, 21);
+            this.includeFileNamesCheckbox.TabIndex = 16;
+            this.includeFileNamesCheckbox.Text = "Include file names";
+            this.includeFileNamesCheckbox.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 483);
+            this.Controls.Add(this.includeFileNamesCheckbox);
             this.Controls.Add(this.rootFolderCombo);
             this.Controls.Add(this.needleCombo);
             this.Controls.Add(this.includeCombo);
@@ -508,6 +525,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ComboBox rootFolderCombo;
+        private System.Windows.Forms.CheckBox includeFileNamesCheckbox;
     }
 }
 

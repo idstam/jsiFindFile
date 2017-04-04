@@ -12,13 +12,15 @@ namespace jsiFindFile
         private readonly string[] _excludeFilters;
         private readonly string _needle;
         private readonly bool _searchSubFolders;
+        private readonly bool _includeFileNames;
 
-        public SearchManager(string[] includeFilters, string[] excludeFilters, string needle, bool searchSubFolders)
+        public SearchManager(string[] includeFilters, string[] excludeFilters, string needle, bool searchSubFolders, bool includeFileNames)
         {
             _includeFilters = includeFilters.Where(f => f != "").ToArray();
             _excludeFilters = null;
             _excludeFilters = excludeFilters.Where(f => f != "").ToArray();
             _searchSubFolders = searchSubFolders;
+            _includeFileNames = includeFileNames;
             _needle = needle;
             _stop = false;
         }
@@ -85,9 +87,16 @@ namespace jsiFindFile
 
         private Tuple<string[], string[]> GetFolderContent(string rootFolder)
         {
-            var files = Directory.GetFiles(rootFolder);
-            var folders = Directory.GetDirectories(rootFolder);
-            return new Tuple<string[], string[]>(files, folders);
+            try
+            {
+                var files = Directory.GetFiles(rootFolder);
+                var folders = Directory.GetDirectories(rootFolder);
+                return new Tuple<string[], string[]>(files, folders);
+            }
+            catch (Exception)
+            {
+                return new Tuple<string[], string[]>(new string[0], new string[0] );
+            }
         }
 
         private bool IncludeFile(string filename)
@@ -120,22 +129,44 @@ namespace jsiFindFile
             var match = new Match(fileName, _needle);
 
             var lineNumber = 0;
-            foreach(var line in File.ReadLines(fileName))
+            int index = fileName.IndexOf(_needle, StringComparison.InvariantCultureIgnoreCase);
+            if (index >= 0)
             {
-                lineNumber++;
-                //var upperLine = line.ToUpperInvariant();
-                //if (upperLine.Contains(needle))
-                int index = line.IndexOf(_needle, StringComparison.InvariantCultureIgnoreCase);
-                if (index >= 0 )
+                match.MatchLines.Add(new MatchLine()
                 {
-                    match.MatchLines.Add(new MatchLine()
+                    Line = "[Match on filename]",
+                    LineNumber = lineNumber,
+                    Position = 0
+                });
+            }
+            try
+            {
+                foreach (var line in File.ReadLines(fileName))
+                {
+                    lineNumber++;
+                    //var upperLine = line.ToUpperInvariant();
+                    //if (upperLine.Contains(needle))
+                    index = line.IndexOf(_needle, StringComparison.InvariantCultureIgnoreCase);
+                    if (index >= 0 )
                     {
-                    	Line = line,
-                        LineNumber = lineNumber,
-                        Position = index
-                    });                    
+                        match.MatchLines.Add(new MatchLine()
+                        {
+                    	    Line = line,
+                            LineNumber = lineNumber,
+                            Position = index
+                        });                    
+                    }
+                    if (_stop) break;
                 }
-                if (_stop) break;
+            }
+            catch (Exception ex)
+            {
+                match.MatchLines.Add(new MatchLine()
+                {
+                    Line = "[ERROR] " + ex.Message,
+                    LineNumber = 0,
+                    Position = 0
+                });
             }
             if (match.MatchLines.Any())
             {

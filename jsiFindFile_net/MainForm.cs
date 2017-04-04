@@ -47,7 +47,7 @@ namespace jsiFindFile
             _includeFilters = includeCombo.Text.ToUpperInvariant().Split('|');
             _excludeFilters = excludeTextBox.Text.ToUpperInvariant().Split('|');
 
-            _currentSearch = new SearchManager(_includeFilters, _excludeFilters, needleCombo.Text, subFoldersCheckBox.Checked);
+            _currentSearch = new SearchManager(_includeFilters, _excludeFilters, needleCombo.Text, subFoldersCheckBox.Checked, includeFileNamesCheckbox.Checked);
             _currentSearch.FoundMatch += Search_FoundMatch;
             _currentSearch.SearchingFolder += Search_SearchingFolder;
             object haystack;
@@ -172,7 +172,7 @@ namespace jsiFindFile
             includeCombo.Items.Clear();
             includeCombo.Items.AddRange(_settings.IncludeFilters);
             includeCombo.Text = _settings.LastIncludeFilter;
-            
+
             excludeTextBox.Text = _settings.ExcludeFilter;
         }
 
@@ -278,6 +278,14 @@ namespace jsiFindFile
         private void MainForm_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        private void lstResults_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F4)
+            {
+                editToolStripMenuItem_Click(sender, null);
+            }
         }
     }
 }
