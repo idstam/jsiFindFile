@@ -92,6 +92,7 @@ namespace jsiFindFile
                 fileItem.SubItems.Add(match.FilePath);
                 fileItem.ToolTipText = match.ToToolTipString();
                 lstResults.Invoke((MethodInvoker) (() => lstResults.Items.Add(fileItem)));
+                tabFiles.Invoke((MethodInvoker) (() => tabFiles.Text = $"Files ({lstResults.Items.Count})"));
                 
 
                 foreach (var line in match.MatchLines)
@@ -102,6 +103,7 @@ namespace jsiFindFile
                     lineItem.SubItems.Add(line.Line);
                     lineItem.SubItems.Add(match.FilePath);
                     lstLines.Invoke((MethodInvoker)(() => lstLines.Items.Add(lineItem)));
+                    tabLines.Invoke((MethodInvoker) (() => tabLines.Text = $"Lines ({lstLines.Items.Count})"));
                 }
             }
             
@@ -255,6 +257,12 @@ namespace jsiFindFile
             Clipboard.SetText(sb.ToString());
         }
 
+        public bool ContainsUnicodeCharacter(string input)
+        {
+            const int MaxAnsiCode = 255;
+
+            return input.Any(c => c > MaxAnsiCode);
+        }
         private void clearIncludeHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _settings.ClearIncludeHistory();
@@ -287,5 +295,6 @@ namespace jsiFindFile
                 editToolStripMenuItem_Click(sender, null);
             }
         }
+
     }
 }
