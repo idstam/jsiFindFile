@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jsiFindFile_net", "jsiFindFile_net\jsiFindFile_net.csproj", "{7F6FBB19-BD11-4835-88D2-BAE8D8B42864}"
 EndProject
@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jsiFindFileUWP", "jsiFindFileUWP\jsiFindFileUWP.csproj", "{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,26 +38,6 @@ Global
 		{7F6FBB19-BD11-4835-88D2-BAE8D8B42864}.Release|x64.Build.0 = Release|Any CPU
 		{7F6FBB19-BD11-4835-88D2-BAE8D8B42864}.Release|x86.ActiveCfg = Release|Any CPU
 		{7F6FBB19-BD11-4835-88D2-BAE8D8B42864}.Release|x86.Build.0 = Release|Any CPU
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Debug|ARM.ActiveCfg = Debug|ARM
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Debug|ARM.Build.0 = Debug|ARM
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Debug|ARM.Deploy.0 = Debug|ARM
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Debug|x64.ActiveCfg = Debug|x64
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Debug|x64.Build.0 = Debug|x64
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Debug|x64.Deploy.0 = Debug|x64
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Debug|x86.ActiveCfg = Debug|x86
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Debug|x86.Build.0 = Debug|x86
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Debug|x86.Deploy.0 = Debug|x86
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Release|Any CPU.ActiveCfg = Release|x86
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Release|ARM.ActiveCfg = Release|ARM
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Release|ARM.Build.0 = Release|ARM
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Release|ARM.Deploy.0 = Release|ARM
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Release|x64.ActiveCfg = Release|x64
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Release|x64.Build.0 = Release|x64
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Release|x64.Deploy.0 = Release|x64
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Release|x86.ActiveCfg = Release|x86
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Release|x86.Build.0 = Release|x86
-		{97104AAD-64E4-4D3A-8DA8-67F6894AF22E}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

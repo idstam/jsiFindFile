@@ -186,14 +186,14 @@ namespace jsiFindFile
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var lvw = tabControl1.SelectedTab == tabFiles ? lstResults : lstLines;
-            var editorPath = jsiGrepWinForm.Properties.Settings.Default.textEditor;
+            var editorPath = jsiFindFile.Properties.Settings.Default.textEditor;
             if (!File.Exists(editorPath))
             {
                 openFileDialog1.Title = "Select your prefered text editor.";
                 openFileDialog1.ShowDialog();
                 editorPath = openFileDialog1.FileName;
-                jsiGrepWinForm.Properties.Settings.Default.textEditor = editorPath;
-                jsiGrepWinForm.Properties.Settings.Default.Save();
+                jsiFindFile.Properties.Settings.Default.textEditor = editorPath;
+                jsiFindFile.Properties.Settings.Default.Save();
             }
             if (lvw.SelectedItems.Count > 0)
             {
