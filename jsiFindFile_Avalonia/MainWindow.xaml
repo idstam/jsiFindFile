@@ -1,0 +1,31 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="jsiFindFile_Avalonia.MainWindow"
+        Title="jsiFindFile">
+  <StackPanel Orientation="Vertical">
+    <StackPanel Margin="5" Orientation="Horizontal" >
+      
+      <TextBlock  MinWidth="95" VerticalAlignment="Center">Search in:</TextBlock>
+      <DropDown ></DropDown>
+      <Button Margin="5">...</Button>
+    </StackPanel>
+    <StackPanel Margin="5" Orientation="Horizontal">
+      <TextBlock  MinWidth="95" VerticalAlignment="Center">Search for:</TextBlock>
+      <DropDown ></DropDown>
+      <Button Margin="5">...</Button>
+    </StackPanel>
+    <StackPanel Margin="5"  Orientation="Horizontal">
+      <TextBlock  MinWidth="95" VerticalAlignment="Center">Include filetypes:</TextBlock>
+      <DropDown Margin="5"></DropDown>
+      <Button Margin="5">...</Button>
+    </StackPanel>
+    <StackPanel Margin="5"  Orientation="Horizontal">
+      <TextBlock  MinWidth="95" VerticalAlignment="Center">Exclude folders:</TextBlock>
+      <TextBox Margin="5"></TextBox>
+      <Button Margin="5">...</Button>
+    </StackPanel>
+  </StackPanel>
+</Window>
