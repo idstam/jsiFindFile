@@ -20,26 +20,40 @@
         <ColumnDefinition ></ColumnDefinition>
         <ColumnDefinition Width="35"></ColumnDefinition>
       </Grid.ColumnDefinitions>
-      <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,5,5,5">Search in:</TextBlock>
-      <DropDown Grid.Column="1" Grid.Row="0" Margin="0,5,0,5" Height="30"></DropDown>
-      <Button Grid.Column="2" Grid.Row="0" Margin="5,5,5,5" Width="30" Height="30">...</Button>
+      <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"  Margin="5,5,5,5">Search in:</TextBlock>
+      <DropDown Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="0,5,0,5" Height="30"></DropDown>
+      <Button Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Margin="5,5,5,5" Width="30" Height="30">...</Button>
       
-      <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,5,5,5">Search for:</TextBlock>
-      <DropDown Grid.Column="1" Grid.Row="1" Margin="0,5,0,5" Height="30" ></DropDown>
+      <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Margin="5,5,5,5">Search for:</TextBlock>
+      <DropDown Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="0,5,0,5" Height="30" ></DropDown>
       
-      <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,5,5,5">Include filetypes:</TextBlock>
-      <DropDown Grid.Column="1" Grid.Row="2" Margin="0,5,0,5" Height="30"></DropDown>
+      <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Margin="5,5,5,5">Include filetypes:</TextBlock>
+      <DropDown Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Margin="0,5,0,5" Height="30"></DropDown>
       
-      <TextBlock Grid.Column="0" Grid.Row="3" Margin="5,5,5,5">Exclude folders:</TextBlock>
-      <DropDown Grid.Column="1" Grid.Row="3" Margin="0,5,0,5" Height="30"></DropDown>
+      <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Margin="5,5,5,5">Exclude folders:</TextBlock>
+      <DropDown Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"  Margin="0,5,0,5" Height="30"></DropDown>
 
       <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
-        <CheckBox Margin="0,0,5,0" IsChecked="true">Search in sub folders</CheckBox>
-        <CheckBox Margin="10,0,5,0">Search in previously found files</CheckBox>
-        <CheckBox Margin="10,0,5,0" IsChecked="true">Include file names</CheckBox>
+        <CheckBox VerticalAlignment="Center" Margin="0,0,5,0" IsChecked="true">Search in sub folders</CheckBox>
+        <CheckBox VerticalAlignment="Center" Margin="10,0,5,0">Search in previously found files</CheckBox>
+        <CheckBox VerticalAlignment="Center" Margin="10,0,5,0" IsChecked="true">Include file names</CheckBox>
       </StackPanel>
       
     </Grid>
-      
+    <DockPanel Margin="5,20,5,5">
+      <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Height="30" Width="70" Margin="5,5,5,5">Searching:</TextBlock>
+      <Button DockPanel.Dock="Right" VerticalAlignment="Center" Height="30" Width="70" Margin="5,5,0,5"  >Search</Button>
+      <TextBlock  VerticalAlignment="Center"  Height="30" >...</TextBlock>
+    </DockPanel>
+    <TabControl>
+      <TabItem Header="Files">
+        <TextBlock>asdfadsf</TextBlock>
+        
+      </TabItem>
+      <TabItem Header="Lines">
+      </TabItem>
+    </TabControl>
+    <DataGrid AutoGenerateColumns="True" Items="{Binding People}"/>
   </StackPanel>
+  
 </Window>

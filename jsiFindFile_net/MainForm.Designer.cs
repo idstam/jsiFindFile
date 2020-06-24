@@ -84,7 +84,7 @@
             this.label1.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(1, 187);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 25);
+            this.label1.Size = new System.Drawing.Size(73, 17);
             this.label1.TabIndex = 11;
             this.label1.Text = "Searching:";
             // 
@@ -108,7 +108,7 @@
             this.label2.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(1, 46);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 25);
+            this.label2.Size = new System.Drawing.Size(76, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Search for:";
             this.toolTip1.SetToolTip(this.label2, "There\'s a context menue here. Try to right click.");
@@ -119,12 +119,12 @@
             this.needlePopUp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearNeedleHistoryToolStripMenuItem});
             this.needlePopUp.Name = "needlePopUp";
-            this.needlePopUp.Size = new System.Drawing.Size(186, 34);
+            this.needlePopUp.Size = new System.Drawing.Size(143, 26);
             // 
             // clearNeedleHistoryToolStripMenuItem
             // 
             this.clearNeedleHistoryToolStripMenuItem.Name = "clearNeedleHistoryToolStripMenuItem";
-            this.clearNeedleHistoryToolStripMenuItem.Size = new System.Drawing.Size(185, 30);
+            this.clearNeedleHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.clearNeedleHistoryToolStripMenuItem.Text = "Clear History";
             this.clearNeedleHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearNeedleHistoryToolStripMenuItem_Click);
             // 
@@ -142,7 +142,7 @@
             this.lstResults.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lstResults.Name = "lstResults";
             this.lstResults.ShowItemToolTips = true;
-            this.lstResults.Size = new System.Drawing.Size(955, 224);
+            this.lstResults.Size = new System.Drawing.Size(955, 287);
             this.lstResults.TabIndex = 5;
             this.lstResults.UseCompatibleStateImageBehavior = false;
             this.lstResults.View = System.Windows.Forms.View.Details;
@@ -173,41 +173,41 @@
             this.copyFilenameToolStripMenuItem,
             this.copyFileResultToolStripMenuItem});
             this.resultPopUp.Name = "resultPopUp";
-            this.resultPopUp.Size = new System.Drawing.Size(275, 154);
+            this.resultPopUp.Size = new System.Drawing.Size(202, 114);
             this.resultPopUp.Opening += new System.ComponentModel.CancelEventHandler(this.resultPopUp_Opening);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(274, 30);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // openContainingFolderToolStripMenuItem
             // 
             this.openContainingFolderToolStripMenuItem.Name = "openContainingFolderToolStripMenuItem";
-            this.openContainingFolderToolStripMenuItem.Size = new System.Drawing.Size(274, 30);
+            this.openContainingFolderToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.openContainingFolderToolStripMenuItem.Text = "Open Containing Folder";
             this.openContainingFolderToolStripMenuItem.Click += new System.EventHandler(this.openContainingFolderToolStripMenuItem_Click);
             // 
             // copyFullPathToolStripMenuItem
             // 
             this.copyFullPathToolStripMenuItem.Name = "copyFullPathToolStripMenuItem";
-            this.copyFullPathToolStripMenuItem.Size = new System.Drawing.Size(274, 30);
+            this.copyFullPathToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.copyFullPathToolStripMenuItem.Text = "Copy Full Path";
             this.copyFullPathToolStripMenuItem.Click += new System.EventHandler(this.copyFullPathToolStripMenuItem_Click);
             // 
             // copyFilenameToolStripMenuItem
             // 
             this.copyFilenameToolStripMenuItem.Name = "copyFilenameToolStripMenuItem";
-            this.copyFilenameToolStripMenuItem.Size = new System.Drawing.Size(274, 30);
+            this.copyFilenameToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.copyFilenameToolStripMenuItem.Text = "Copy Filename";
             this.copyFilenameToolStripMenuItem.Click += new System.EventHandler(this.copyFilenameToolStripMenuItem_Click);
             // 
             // copyFileResultToolStripMenuItem
             // 
             this.copyFileResultToolStripMenuItem.Name = "copyFileResultToolStripMenuItem";
-            this.copyFileResultToolStripMenuItem.Size = new System.Drawing.Size(274, 30);
+            this.copyFileResultToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.copyFileResultToolStripMenuItem.Text = "Copy All";
             this.copyFileResultToolStripMenuItem.Click += new System.EventHandler(this.copyFileResultToolStripMenuItem_Click);
             // 
@@ -231,7 +231,7 @@
             this.usePreviousCheckBox.Location = new System.Drawing.Point(273, 144);
             this.usePreviousCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.usePreviousCheckBox.Name = "usePreviousCheckBox";
-            this.usePreviousCheckBox.Size = new System.Drawing.Size(331, 29);
+            this.usePreviousCheckBox.Size = new System.Drawing.Size(214, 21);
             this.usePreviousCheckBox.TabIndex = 10;
             this.usePreviousCheckBox.Text = "Search in previously found files";
             this.usePreviousCheckBox.UseVisualStyleBackColor = true;
@@ -254,7 +254,7 @@
             this.label3.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(1, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 25);
+            this.label3.Size = new System.Drawing.Size(69, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Search in:";
             // 
@@ -265,7 +265,7 @@
             this.label4.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(1, 81);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(173, 25);
+            this.label4.Size = new System.Drawing.Size(110, 17);
             this.label4.TabIndex = 5;
             this.label4.Text = "Include filetypes:";
             this.toolTip1.SetToolTip(this.label4, "Pipe separated list of file types to include in the search. Example: *.bas|*.vb|*" +
@@ -277,12 +277,12 @@
             this.includePopUp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearIncludeHistoryToolStripMenuItem});
             this.includePopUp.Name = "needlePopUp";
-            this.includePopUp.Size = new System.Drawing.Size(186, 34);
+            this.includePopUp.Size = new System.Drawing.Size(143, 26);
             // 
             // clearIncludeHistoryToolStripMenuItem
             // 
             this.clearIncludeHistoryToolStripMenuItem.Name = "clearIncludeHistoryToolStripMenuItem";
-            this.clearIncludeHistoryToolStripMenuItem.Size = new System.Drawing.Size(185, 30);
+            this.clearIncludeHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.clearIncludeHistoryToolStripMenuItem.Text = "Clear History";
             this.clearIncludeHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearIncludeHistoryToolStripMenuItem_Click);
             // 
@@ -294,7 +294,7 @@
             this.excludeTextBox.Location = new System.Drawing.Point(114, 112);
             this.excludeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.excludeTextBox.Name = "excludeTextBox";
-            this.excludeTextBox.Size = new System.Drawing.Size(819, 32);
+            this.excludeTextBox.Size = new System.Drawing.Size(819, 24);
             this.excludeTextBox.TabIndex = 8;
             // 
             // label5
@@ -303,7 +303,7 @@
             this.label5.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(1, 115);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(161, 25);
+            this.label5.Size = new System.Drawing.Size(105, 17);
             this.label5.TabIndex = 7;
             this.label5.Text = "Exclude folders:";
             this.toolTip1.SetToolTip(this.label5, "Pipe separated list of folders to ignore while searching. Example .git|bin|obj");
@@ -322,16 +322,16 @@
             this.tabControl1.Location = new System.Drawing.Point(4, 212);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(969, 267);
+            this.tabControl1.Size = new System.Drawing.Size(969, 323);
             this.tabControl1.TabIndex = 14;
             // 
             // tabFiles
             // 
             this.tabFiles.Controls.Add(this.lstResults);
-            this.tabFiles.Location = new System.Drawing.Point(4, 33);
+            this.tabFiles.Location = new System.Drawing.Point(4, 26);
             this.tabFiles.Name = "tabFiles";
             this.tabFiles.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFiles.Size = new System.Drawing.Size(961, 230);
+            this.tabFiles.Size = new System.Drawing.Size(961, 293);
             this.tabFiles.TabIndex = 0;
             this.tabFiles.Text = "Files";
             this.tabFiles.UseVisualStyleBackColor = true;
@@ -339,10 +339,10 @@
             // tabLines
             // 
             this.tabLines.Controls.Add(this.lstLines);
-            this.tabLines.Location = new System.Drawing.Point(4, 29);
+            this.tabLines.Location = new System.Drawing.Point(4, 26);
             this.tabLines.Name = "tabLines";
             this.tabLines.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLines.Size = new System.Drawing.Size(961, 234);
+            this.tabLines.Size = new System.Drawing.Size(961, 237);
             this.tabLines.TabIndex = 1;
             this.tabLines.Text = "Lines";
             this.tabLines.UseVisualStyleBackColor = true;
@@ -362,7 +362,7 @@
             this.lstLines.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lstLines.Name = "lstLines";
             this.lstLines.ShowItemToolTips = true;
-            this.lstLines.Size = new System.Drawing.Size(955, 228);
+            this.lstLines.Size = new System.Drawing.Size(955, 231);
             this.lstLines.TabIndex = 6;
             this.lstLines.UseCompatibleStateImageBehavior = false;
             this.lstLines.View = System.Windows.Forms.View.Details;
@@ -396,7 +396,7 @@
             this.subFoldersCheckBox.Location = new System.Drawing.Point(114, 144);
             this.subFoldersCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.subFoldersCheckBox.Name = "subFoldersCheckBox";
-            this.subFoldersCheckBox.Size = new System.Drawing.Size(236, 29);
+            this.subFoldersCheckBox.Size = new System.Drawing.Size(153, 21);
             this.subFoldersCheckBox.TabIndex = 9;
             this.subFoldersCheckBox.Text = "Search in sub folders";
             this.subFoldersCheckBox.UseVisualStyleBackColor = true;
@@ -408,7 +408,7 @@
             this.includeCombo.FormattingEnabled = true;
             this.includeCombo.Location = new System.Drawing.Point(114, 78);
             this.includeCombo.Name = "includeCombo";
-            this.includeCombo.Size = new System.Drawing.Size(819, 32);
+            this.includeCombo.Size = new System.Drawing.Size(819, 25);
             this.includeCombo.TabIndex = 6;
             // 
             // needleCombo
@@ -418,7 +418,7 @@
             this.needleCombo.FormattingEnabled = true;
             this.needleCombo.Location = new System.Drawing.Point(114, 43);
             this.needleCombo.Name = "needleCombo";
-            this.needleCombo.Size = new System.Drawing.Size(819, 32);
+            this.needleCombo.Size = new System.Drawing.Size(819, 25);
             this.needleCombo.TabIndex = 4;
             // 
             // rootFolderCombo
@@ -428,7 +428,7 @@
             this.rootFolderCombo.FormattingEnabled = true;
             this.rootFolderCombo.Location = new System.Drawing.Point(114, 10);
             this.rootFolderCombo.Name = "rootFolderCombo";
-            this.rootFolderCombo.Size = new System.Drawing.Size(819, 32);
+            this.rootFolderCombo.Size = new System.Drawing.Size(819, 25);
             this.rootFolderCombo.TabIndex = 15;
             // 
             // includeFileNamesCheckbox
@@ -440,7 +440,7 @@
             this.includeFileNamesCheckbox.Location = new System.Drawing.Point(493, 144);
             this.includeFileNamesCheckbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.includeFileNamesCheckbox.Name = "includeFileNamesCheckbox";
-            this.includeFileNamesCheckbox.Size = new System.Drawing.Size(211, 29);
+            this.includeFileNamesCheckbox.Size = new System.Drawing.Size(134, 21);
             this.includeFileNamesCheckbox.TabIndex = 16;
             this.includeFileNamesCheckbox.Text = "Include file names";
             this.includeFileNamesCheckbox.UseVisualStyleBackColor = true;
@@ -448,9 +448,9 @@
             // MainForm
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(978, 483);
+            this.ClientSize = new System.Drawing.Size(978, 539);
             this.Controls.Add(this.includeFileNamesCheckbox);
             this.Controls.Add(this.rootFolderCombo);
             this.Controls.Add(this.needleCombo);
