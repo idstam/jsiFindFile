@@ -4,6 +4,9 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using jsiFindFile;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace jsiFindFile_Avalonia
 {
@@ -20,12 +23,16 @@ namespace jsiFindFile_Avalonia
         private readonly TextBox _needleCombo;
         private readonly TextBox _includeCombo;
         private readonly TextBox _excludeCombo;
+        private readonly TextBox _searchingLabel;
         private readonly CheckBox _subFoldersCheckBox;
         private readonly CheckBox _usePreviousCheckBox;
         private readonly CheckBox _includeFileNamesCheckbox;
         private readonly Button _searchButton;
         private readonly DataGrid _filesGrid;
         private readonly DataGrid _linesGrid;
+
+        private List<FileResult> _fileResults;
+        private List<LineResult> _lineResults;
 
         public MainWindow()
         {
@@ -35,9 +42,11 @@ namespace jsiFindFile_Avalonia
 #endif
 
             _rootFolderCombo = this.FindControl<TextBox>("rootFolderCombo");
+
             _needleCombo = this.FindControl<TextBox>("needleCombo");
             _includeCombo = this.FindControl<TextBox>("includeCombo");
             _excludeCombo = this.FindControl<TextBox>("excludeCombo");
+            _searchingLabel = this.FindControl<TextBox>("searchingLabel");
 
             _subFoldersCheckBox = this.FindControl<CheckBox>("subFoldersCheckBox");
             _usePreviousCheckBox = this.FindControl<CheckBox>("usePreviousCheckBox");
@@ -49,20 +58,23 @@ namespace jsiFindFile_Avalonia
 
 
             _filesGrid = this.FindControl<DataGrid>("FilesGrid");
-            _filesGrid.Columns.Add(new DataGridTextColumn() { Header = new DataGridColumnHeader() {Content="Name" } });
+            _filesGrid.Columns.Add(new DataGridTextColumn() { Header = new DataGridColumnHeader() { Content = "Name" } });
             _filesGrid.Columns.Add(new DataGridTextColumn() { Header = new DataGridColumnHeader() { Content = "Matches" } });
             _filesGrid.Columns.Add(new DataGridTextColumn() { Header = new DataGridColumnHeader() { Content = "Path" } });
 
 
             _linesGrid = this.FindControl<DataGrid>("LinesGrid");
+            _fileResults = new List<FileResult>();
+            _lineResults = new List<LineResult>();
 
+            LoadSearchSettings();
         }
 
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            
+
         }
 
         private void btnSearch_OnClick(object sender, RoutedEventArgs e)
@@ -78,8 +90,8 @@ namespace jsiFindFile_Avalonia
             SaveSearchSettings();
 
 
-            _includeFilters = _includeCombo.Text.ToUpperInvariant().Split('|');
-            _excludeFilters = _excludeCombo.Text.ToUpperInvariant().Split('|');
+            _includeFilters = _includeCombo.Text?.ToUpperInvariant().Split('|');
+            _excludeFilters = _excludeCombo.Text?.ToUpperInvariant().Split('|');
 
             _currentSearch = new SearchManager(_includeFilters, _excludeFilters, _needleCombo.Text, _subFoldersCheckBox.IsChecked??false, _includeFileNamesCheckbox.IsChecked??false);
             _currentSearch.FoundMatch += Search_FoundMatch;
@@ -94,8 +106,11 @@ namespace jsiFindFile_Avalonia
             {
                 haystack = _rootFolderCombo.Text;
             }
-            lstResults.Items.Clear();
-            lstLines.Items.Clear();
+            _fileResults.Clear();
+            _lineResults.Clear();
+            //_filesGrid.Items = new List<FileResult>();
+            //_linesGrid.Items = new List<LineResult>();
+
             _currentSearch.Search(haystack);
 
             ToggleSearchState(false);
@@ -109,9 +124,9 @@ namespace jsiFindFile_Avalonia
                 return _droppedFiles.ToList();
             }
 
-            foreach (ListViewItem item in lstResults.Items)
+            foreach (FileResult item in _filesGrid.Items)
             {
-                result.Add(Path.Combine(item.SubItems[2].Text, item.SubItems[0].Text));
+                result.Add(Path.Combine(item.Path, item.Name));
             }
             return result;
         }
@@ -120,48 +135,70 @@ namespace jsiFindFile_Avalonia
             var f = (e as SearchingFolderEventArgs)?.Folder;
             if (!string.IsNullOrEmpty(f))
             {
-                searchingLabel.Invoke((MethodInvoker)(() => searchingLabel.Text = f));
-                Application.DoEvents();
+                //searchingLabel.Invoke((MethodInvoker)(() => searchingLabel.Text = f));
+                //Application.DoEvents();
+                _searchingLabel.Text = f;
+
+
             }
         }
         private void Search_FoundMatch(object sender, EventArgs m)
         {
-            if (_searching) this.Cursor = Cursors.WaitCursor;
+            //if (_searching) this.Cursor = Avalonia.Input.Wa//Cursors.WaitCursor;
 
-            Application.DoEvents();
+            //Application.DoEvents();
 
             Match match = (m as MatchEventArgs)?.Match;
             if (match != null)
             {
-                var fileItem = new ListViewItem();
-                fileItem.Text = match.FileName;
-                fileItem.SubItems.Add(match.MatchLines.Count.ToString());
-                fileItem.SubItems.Add(match.FilePath);
-                fileItem.ToolTipText = match.ToToolTipString();
-                lstResults.Invoke((MethodInvoker)(() => lstResults.Items.Add(fileItem)));
-                tabFiles.Invoke((MethodInvoker)(() => tabFiles.Text = $"Files ({lstResults.Items.Count})"));
+                var fileItem = new FileResult();
+                fileItem.Name = match.FileName;
+                fileItem.Matches = match.MatchLines.Count.ToString();
+                fileItem.Path= match.FilePath;
+                //fileItem.ToolTipText = match.ToToolTipString();
+                
+                _fileResults.Add(fileItem);
+                //tabFiles.Invoke((MethodInvoker)(() => tabFiles.Text = $"Files ({lstResults.Items.Count})"));
 
 
                 foreach (var line in match.MatchLines)
                 {
-                    var lineItem = new ListViewItem();
-                    lineItem.Text = match.FileName;
-                    lineItem.SubItems.Add(line.LineNumber.ToString());
-                    lineItem.SubItems.Add(line.Line);
-                    lineItem.SubItems.Add(match.FilePath);
-                    lstLines.Invoke((MethodInvoker)(() => lstLines.Items.Add(lineItem)));
-                    tabLines.Invoke((MethodInvoker)(() => tabLines.Text = $"Lines ({lstLines.Items.Count})"));
+                    var lineItem = new LineResult();
+                    lineItem.Name = match.FileName;
+                    lineItem.Line = line.LineNumber.ToString();
+                    lineItem.Text =line.Line;
+                    lineItem.Path = match.FilePath;
+                    _lineResults.Add(lineItem);
+                    //tabLines.Invoke((MethodInvoker)(() => tabLines.Text = $"Lines ({lstLines.Items.Count})"));
                 }
             }
 
 
+        }
+
+
+        private void LoadSearchSettings()
+        {
+            _needleCombo.Text = _settings.LastNeedle;
+            //needleCombo.Items.Clear();
+            //needleCombo.Items.AddRange(_settings.Needles);
+
+            _rootFolderCombo.Text = _settings.LastSearchRoot;
+            //rootFolderCombo.Items.Clear();
+            //rootFolderCombo.Items.AddRange(_settings.SearchRoots);
+
+            //includeCombo.Items.Clear();
+            //includeCombo.Items.AddRange(_settings.IncludeFilters);
+            _includeCombo.Text = _settings.LastIncludeFilter;
+
+            _excludeCombo.Text = _settings.ExcludeFilter;
         }
         private void SaveSearchSettings()
         {
             _settings.LastNeedle = _needleCombo.Text;
             _settings.LastSearchRoot = _rootFolderCombo.Text;
             _settings.LastIncludeFilter = _includeCombo.Text;
-            _settings.ExcludeFilter = excludeTextBox.Text;
+            _settings.ExcludeFilter = _excludeCombo.Text;
             _settings.Save();
         }
         private void ToggleSearchState(bool searching)
@@ -170,14 +207,14 @@ namespace jsiFindFile_Avalonia
 
             if (searching)
             {
-                this.Cursor = Cursors.WaitCursor;
-                searchButton.Text = "Stop";
-                searchingLabel.Text = "...";
+                //this.Cursor = Cursors.WaitCursor;
+                _searchButton.Content = "Stop";
+                _searchingLabel.Text = "...";
             }
             else
             {
-                this.Cursor = Cursors.Default;
-                searchButton.Text = "Search";
+                //this.Cursor = Cursors.Default;
+                _searchButton.Content = "Search";
                 _currentSearch.Stop();
             }
 
