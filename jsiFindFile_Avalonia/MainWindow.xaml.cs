@@ -5,6 +5,7 @@ using Avalonia.Markup.Xaml;
 using jsiFindFile;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
@@ -28,12 +29,12 @@ namespace jsiFindFile_Avalonia
         private readonly CheckBox _usePreviousCheckBox;
         private readonly CheckBox _includeFileNamesCheckbox;
         private readonly Button _searchButton;
-        private readonly DataGrid _filesGrid;
-        private readonly DataGrid _linesGrid;
+        private readonly ObservableCollection<FileResult> _fileResults;
+        private readonly ObservableCollection<LineResult> _lineResults;
 
-        private List<FileResult> _fileResults;
-        private List<LineResult> _lineResults;
 
+        public ObservableCollection<FileResult> FileResults => _fileResults;
+        public ObservableCollection<LineResult> LineResults => _lineResults;
         public MainWindow()
         {
             InitializeComponent();
@@ -57,15 +58,11 @@ namespace jsiFindFile_Avalonia
             _searchButton.Click += btnSearch_OnClick;
 
 
-            _filesGrid = this.FindControl<DataGrid>("FilesGrid");
-            _filesGrid.Columns.Add(new DataGridTextColumn() { Header = new DataGridColumnHeader() { Content = "Name" } });
-            _filesGrid.Columns.Add(new DataGridTextColumn() { Header = new DataGridColumnHeader() { Content = "Matches" } });
-            _filesGrid.Columns.Add(new DataGridTextColumn() { Header = new DataGridColumnHeader() { Content = "Path" } });
 
+            _fileResults = new ObservableCollection<FileResult>();
+            _lineResults = new ObservableCollection<LineResult>();
 
-            _linesGrid = this.FindControl<DataGrid>("LinesGrid");
-            _fileResults = new List<FileResult>();
-            _lineResults = new List<LineResult>();
+            this.DataContext = this;
 
             LoadSearchSettings();
         }
@@ -93,12 +90,12 @@ namespace jsiFindFile_Avalonia
             _includeFilters = _includeCombo.Text?.ToUpperInvariant().Split('|');
             _excludeFilters = _excludeCombo.Text?.ToUpperInvariant().Split('|');
 
-            _currentSearch = new SearchManager(_includeFilters, _excludeFilters, _needleCombo.Text, _subFoldersCheckBox.IsChecked??false, _includeFileNamesCheckbox.IsChecked??false);
+            _currentSearch = new SearchManager(_includeFilters, _excludeFilters, _needleCombo.Text, _subFoldersCheckBox.IsChecked ?? false, _includeFileNamesCheckbox.IsChecked ?? false);
             _currentSearch.FoundMatch += Search_FoundMatch;
             _currentSearch.SearchingFolder += Search_SearchingFolder;
             object haystack;
 
-            if (_usePreviousCheckBox.IsChecked??false)
+            if (_usePreviousCheckBox.IsChecked ?? false)
             {
                 haystack = GetOldFileList();
             }
@@ -106,8 +103,8 @@ namespace jsiFindFile_Avalonia
             {
                 haystack = _rootFolderCombo.Text;
             }
-            _fileResults.Clear();
-            _lineResults.Clear();
+            FileResults.Clear();
+            LineResults.Clear();
             //_filesGrid.Items = new List<FileResult>();
             //_linesGrid.Items = new List<LineResult>();
 
@@ -124,7 +121,7 @@ namespace jsiFindFile_Avalonia
                 return _droppedFiles.ToList();
             }
 
-            foreach (FileResult item in _filesGrid.Items)
+            foreach (FileResult item in FileResults)
             {
                 result.Add(Path.Combine(item.Path, item.Name));
             }
@@ -154,10 +151,10 @@ namespace jsiFindFile_Avalonia
                 var fileItem = new FileResult();
                 fileItem.Name = match.FileName;
                 fileItem.Matches = match.MatchLines.Count.ToString();
-                fileItem.Path= match.FilePath;
+                fileItem.Path = match.FilePath;
                 //fileItem.ToolTipText = match.ToToolTipString();
-                
-                _fileResults.Add(fileItem);
+
+                FileResults.Add(fileItem);
                 //tabFiles.Invoke((MethodInvoker)(() => tabFiles.Text = $"Files ({lstResults.Items.Count})"));
 
 
@@ -166,9 +163,9 @@ namespace jsiFindFile_Avalonia
                     var lineItem = new LineResult();
                     lineItem.Name = match.FileName;
                     lineItem.Line = line.LineNumber.ToString();
-                    lineItem.Text =line.Line;
+                    lineItem.Text = line.Line;
                     lineItem.Path = match.FilePath;
-                    _lineResults.Add(lineItem);
+                    LineResults.Add(lineItem);
                     //tabLines.Invoke((MethodInvoker)(() => tabLines.Text = $"Lines ({lstLines.Items.Count})"));
                 }
             }

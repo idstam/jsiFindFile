@@ -6,6 +6,7 @@
         x:Class="jsiFindFile_Avalonia.MainWindow"
         Title="jsiFindFile"
         FontSize="15">
+  
   <StackPanel Orientation="Vertical">
     <Grid>
       <Grid.RowDefinitions>
@@ -45,15 +46,18 @@
       <Button Name="btnSearch" DockPanel.Dock="Right" VerticalAlignment="Center" Height="30" Width="70" Margin="5,5,0,5" Click="btnSearch_OnClick" >Search</Button>
       <TextBox Name="searchingLabel"  VerticalAlignment="Center"  Height="30" >...</TextBox>
     </DockPanel>
+    
+    
     <TabControl>
       <TabItem Header="Files">
-        <DataGrid Name="FilesGrid" AutoGenerateColumns="True" />    
+        <DataGrid Name="FilesGrid" AutoGenerateColumns="True" Items="{Binding FileResults}" />    
         
       </TabItem>
       <TabItem Header="Lines">
+        <DataGrid Name="LinesGrid" AutoGenerateColumns="True" Items="{Binding LineResults}" >    </DataGrid>
       </TabItem>
     </TabControl>
-    <DataGrid Name="LinesGrid" AutoGenerateColumns="True"  >    </DataGrid>
+    
   </StackPanel>
   
 </Window>
