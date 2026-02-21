@@ -236,6 +236,16 @@ namespace jsiFindFile
             }
 
         }
+        private void copyTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var lvw = tabControl1.SelectedTab == tabFiles ? lstResults : lstLines;
+            if (lvw.SelectedItems.Count > 0)
+            {
+                var item = lvw.SelectedItems[0];
+                Clipboard.SetText(item.SubItems[2].Text);
+            }
+
+        }
 
         private void copyFileResultToolStripMenuItem_Click(object sender, EventArgs e)
         {
